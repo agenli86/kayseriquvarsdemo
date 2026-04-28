@@ -4,14 +4,23 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock, ArrowLeft, Share2, Tag } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
-import { createClient } from '@/lib/supabase/server'
+// DİKKAT: createClient yerine sunucu tarafında cookies bağımlılığı olmayan 
+// bir client oluşturmak için gerekli import'u kontrol edin. 
+// Eğer lib içinde sadece cookies'li varsa, aşağıdaki düzeltmeyi uygulayın.
+import { createClient } from '@/lib/supabase/server' 
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 
+// Tip tanımlamaları
 interface Props {
   params: { slug: string }
 }
 
+/**
+ * Metadata oluşturma (Build anında çalışır)
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // NOT: Eğer createClient hata vermeye devam ederse, 
+  // burada sadece veri çekmek için cookies() içermeyen bir supabase client kullanın.
   const supabase = createClient()
   const { data } = await supabase
     .from('blog_posts')
@@ -35,18 +44,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+/**
+ * Statik yolları oluşturma (Build anında çalışır)
+ * Hatanın ana kaynağı genellikle buradaki cookies kullanımıdır.
+ */
 export async function generateStaticParams() {
-  const supabase = createClient()
-  const { data } = await supabase.from('blog_posts').select('slug').eq('is_published', true)
-  return (data || []).map((b) => ({ slug: b.slug }))
+  try {
+    // Burada cookies() kullanmayan bir istemci olması şarttır.
+    const supabase = createClient() 
+    const { data } = await supabase
+      .from('blog_posts')
+      .select('slug')
+      .eq('is_published', true)
+    
+    return (data || []).map((b) => ({ slug: b.slug }))
+  } catch (error) {
+    console.error("Static params generation failed:", error)
+    return []
+  }
 }
 
+/**
+ * Sayfa Bileşeni
+ */
 export default async function BlogDetailPage({ params }: Props) {
+  const { slug } = params // Next.js 14.2+ için params'ı destructure etmek önerilir
   const supabase = createClient()
+  
   const { data: post } = await supabase
     .from('blog_posts')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('is_published', true)
     .single()
 
@@ -65,7 +93,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <SiteLayout>
-      {/* Cinematic blog hero */}
+      {/* Blog Hero Bölümü */}
       <section className="relative h-[60vh] min-h-[420px] md:min-h-[520px] overflow-hidden bg-lavender-900">
         <Image
           src={heroImg}
@@ -84,7 +112,7 @@ export default async function BlogDetailPage({ params }: Props) {
             className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white mb-6 transition-colors w-fit"
           >
             <ArrowLeft size={16} />
-            <span>Blog'a Dön</span>
+            <span>Blog&apos;a Dön</span>
           </Link>
 
           {post.category && (
@@ -130,12 +158,12 @@ export default async function BlogDetailPage({ params }: Props) {
             <p className="text-gray-500 italic">İçerik henüz hazırlanıyor.</p>
           )}
 
-          {/* Share / CTA */}
+          {/* Paylaş / Randevu CTA */}
           <div className="mt-16 p-8 rounded-3xl bg-gradient-quvars-soft text-center">
             <h3 className="text-2xl font-heading font-medium text-lavender-900 mb-3">
               Beğendiniz mi? Bizi takip edin
             </h3>
-            <p className="text-gray-600 mb-5">İlham veren içerikler için Instagram'da bize katılın.</p>
+            <p className="text-gray-600 mb-5">İlham veren içerikler için Instagram&apos;da bize katılın.</p>
             <Link
               href="/randevu"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
@@ -146,7 +174,7 @@ export default async function BlogDetailPage({ params }: Props) {
         </div>
       </article>
 
-      {/* Related */}
+      {/* İlgili Yazılar */}
       {related && related.length > 0 && (
         <section className="py-12 md:py-16 bg-gradient-quvars-soft">
           <div className="container mx-auto px-4">
@@ -181,7 +209,7 @@ export default async function BlogDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* Article Schema */}
+      {/* Schema Verisi */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
