@@ -4,16 +4,28 @@ import Link from 'next/link'
 import { Calendar, Clock, Phone, MessageCircle, Sparkles, Tag } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 import { getIcon } from '@/lib/icons'
+
+// DÜZELTME: Build anında hata almamak için standart istemciyi ekliyoruz
+import { createClient as createStaticClient } from '@supabase/supabase-js'
+import { createClient } from '@/lib/supabase/server'
 
 interface Props {
   params: { slug: string }
 }
 
+// Build anında kullanılacak güvenli istemci oluşturucu
+const getBuildTimeClient = () => {
+  return createStaticClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const supabase = createClient()
+  // Build anında cookies hatası almamak için getBuildTimeClient kullanıyoruz
+  const supabase = getBuildTimeClient()
   const { data } = await supabase
     .from('services')
     .select('*')
@@ -35,12 +47,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const supabase = createClient()
-  const { data } = await supabase.from('services').select('slug').eq('is_active', true)
-  return (data || []).map((s) => ({ slug: s.slug }))
+  try {
+    // KRİTİK: Vercel build hatasını önleyen kısım
+    const supabase = getBuildTimeClient()
+    const { data } = await supabase
+      .from('services')
+      .select('slug')
+      .eq('is_active', true)
+    
+    return (data || []).map((s) => ({ slug: s.slug }))
+  } catch (error) {
+    console.error("Static params failed for services:", error)
+    return []
+  }
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
+  // Sayfa render edilirken (istek anında) normal createClient kullanılabilir
   const supabase = createClient()
   const { data: service } = await supabase
     .from('services')
@@ -61,7 +84,6 @@ export default async function ServiceDetailPage({ params }: Props) {
   const Icon = getIcon(service.icon)
   const heroImg = service.image_url ? getImageUrl(service.image_url) : 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80'
 
-  // WhatsApp fiyat sorma mesajı
   const whatsappMsg = `Merhaba, ${service.name} hizmeti hakkında fiyat ve detay bilgisi almak istiyorum.`
   const whatsappLink = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`
 
@@ -81,7 +103,6 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Content */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-quvars-soft flex items-center justify-center">
@@ -102,10 +123,8 @@ export default async function ServiceDetailPage({ params }: Props) {
               )}
             </div>
 
-            {/* Sidebar */}
             <aside className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
-                {/* Quick info card — fiyat YOK */}
                 <div className="p-6 bg-white rounded-3xl shadow-soft border border-lavender-100">
                   <h3 className="text-lg font-heading font-semibold text-lavender-900 mb-4">
                     Hizmet Bilgileri
@@ -124,22 +143,16 @@ export default async function ServiceDetailPage({ params }: Props) {
                       <Tag size={18} className="text-rose-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <div className="text-xs text-gray-500">Fiyat</div>
-                        <div className="font-medium text-lavender-900">
-                          Bilgi için iletişime geçin
-                        </div>
+                        <div className="font-medium text-lavender-900">Bilgi için iletişime geçin</div>
                       </div>
                     </li>
                   </ul>
                 </div>
 
-                {/* WhatsApp CTA — fiyat sorma odaklı */}
-                <div className="p-6 rounded-3xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-soft-lg overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2" />
+                <div className="p-6 rounded-3xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-soft-lg relative overflow-hidden">
                   <MessageCircle size={32} className="text-white mb-3" />
                   <h3 className="text-xl font-heading font-medium mb-1">Fiyat Bilgisi Al</h3>
-                  <p className="text-sm text-white/90 mb-4 leading-relaxed">
-                    Anlık güncel fiyatlar ve kişiye özel paket teklifleri için WhatsApp'tan bize yazın.
-                  </p>
+                  <p className="text-sm text-white/90 mb-4">WhatsApp üzerinden güncel paket tekliflerini öğrenebilirsiniz.</p>
                   <a
                     href={whatsappLink}
                     target="_blank"
@@ -150,12 +163,9 @@ export default async function ServiceDetailPage({ params }: Props) {
                   </a>
                 </div>
 
-                {/* Randevu CTA */}
-                <div className="p-6 rounded-3xl bg-gradient-quvars-dark text-white shadow-soft-lg overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-rose-400/20 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2" />
+                <div className="p-6 rounded-3xl bg-gradient-quvars-dark text-white shadow-soft-lg relative overflow-hidden">
                   <Sparkles size={28} className="text-rose-300 mb-3" />
                   <h3 className="text-xl font-heading font-medium mb-2">Randevu Al</h3>
-                  <p className="text-sm text-white/80 mb-5">Uzman ekibimizden ücretsiz konsültasyon için randevu oluşturun.</p>
                   <div className="flex flex-col gap-2">
                     <Link
                       href={`/randevu?hizmet=${service.slug}`}
@@ -164,20 +174,12 @@ export default async function ServiceDetailPage({ params }: Props) {
                       <Calendar size={16} />
                       <span>Randevu Al</span>
                     </Link>
-                    <a
-                      href={`tel:${COMPANY.phoneE164}`}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 text-white/80 text-sm font-medium hover:text-white transition-colors"
-                    >
-                      <Phone size={14} />
-                      <span>{COMPANY.phone}</span>
-                    </a>
                   </div>
                 </div>
               </div>
             </aside>
           </div>
 
-          {/* Related */}
           {related && related.length > 0 && (
             <div className="mt-20">
               <h2 className="text-2xl md:text-3xl font-heading font-medium text-lavender-900 mb-8 text-center">
