@@ -4,22 +4,37 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, Calendar, MessageCircle, Award } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
-import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
+
+// DÜZELTME: Build anında hata almamak için gerekli importlar
+import { createClient as createStaticClient } from '@supabase/supabase-js'
+import { createClient } from '@/lib/supabase/server'
 
 interface Props {
   params: { slug: string }
 }
 
+// Build (Derleme) anında çerez hatası almadan çalışacak güvenli istemci
+const getBuildTimeClient = () => {
+  return createStaticClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
+
+/**
+ * Metadata oluşturma (Build anında çalışır)
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const supabase = createClient()
+  const supabase = getBuildTimeClient() // Güvenli istemci kullanımı
   const { data } = await supabase
     .from('specialists')
     .select('*')
     .eq('slug', params.slug)
     .single()
+
   if (!data) return { title: 'Uzman bulunamadı' }
+
   return {
     title: `${data.name}${data.title ? ' - ' + data.title : ''}`,
     description: data.bio?.substring(0, 160) || '',
@@ -27,12 +42,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+/**
+ * Statik Yolları Belirleme (Build anında çalışır)
+ * Bu fonksiyon eksikti, eklenmesi build performansını artırır ve hataları önler.
+ */
+export async function generateStaticParams() {
+  try {
+    const supabase = getBuildTimeClient()
+    const { data } = await supabase
+      .from('specialists')
+      .select('slug')
+      .eq('is_active', true)
+    
+    return (data || []).map((s) => ({ slug: s.slug }))
+  } catch (error) {
+    console.error("Uzmanlar static params hatası:", error)
+    return []
+  }
+}
+
+/**
+ * Uzman Detay Sayfası
+ */
 export default async function SpecialistDetailPage({ params }: Props) {
-  const supabase = createClient()
+  const { slug } = params
+  const supabase = createClient() // İstek anında standart istemci
+  
   const { data: s } = await supabase
     .from('specialists')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('is_active', true)
     .single()
 
@@ -53,7 +92,7 @@ export default async function SpecialistDetailPage({ params }: Props) {
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-            {/* Photo */}
+            {/* Fotoğraf */}
             <div className="lg:col-span-1">
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-soft-lg">
                 <Image
@@ -61,13 +100,12 @@ export default async function SpecialistDetailPage({ params }: Props) {
                   alt={s.name}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
                   priority
                 />
               </div>
             </div>
 
-            {/* Info */}
+            {/* Bilgiler */}
             <div className="lg:col-span-2">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/80 backdrop-blur rounded-full text-xs font-medium text-lavender-700 uppercase tracking-wider">
                 <Award size={12} />
