@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, ArrowUpRight, Users } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getImageUrl } from '@/lib/constants'
 
 export default async function SpecialistsSection() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: specialists } = await supabase
     .from('specialists')
     .select('*')

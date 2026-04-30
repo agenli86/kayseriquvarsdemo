@@ -33,7 +33,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-shrink">
             <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-lavender-200 group-hover:ring-rose-300 transition-all duration-300 flex-shrink-0">
               {logoUrl ? (
                 <Image src={logoUrl} alt={siteName} fill className="object-cover" sizes="48px" priority />
@@ -43,16 +43,14 @@ export default function Header({ settings }: { settings: SiteSettings }) {
                 </div>
               )}
             </div>
-            {!logoUrl && (
-              <div className="hidden sm:block">
-                <div className="text-lg md:text-xl font-heading font-semibold text-gradient leading-tight">
-                  {siteName}
-                </div>
-                <div className="text-[10px] md:text-xs tracking-[0.2em] text-lavender-600 uppercase font-medium -mt-0.5">
-                  {siteTagline}
-                </div>
+            <div className="min-w-0">
+              <div className="text-base md:text-xl font-heading font-semibold text-gradient leading-tight truncate">
+                {siteName}
               </div>
-            )}
+              <div className="text-[9px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] text-lavender-600 uppercase font-medium -mt-0.5 truncate">
+                {siteTagline}
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Nav */}

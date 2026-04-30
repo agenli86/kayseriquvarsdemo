@@ -13,6 +13,8 @@ import FaqSection from '@/components/home/FaqSection'
 import MapSection from '@/components/home/MapSection'
 import { getSettings } from '@/lib/settings'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const settings = await getSettings()
 
@@ -38,4 +40,3 @@ export default async function HomePage() {
   )
 }
 
-export const revalidate = 60

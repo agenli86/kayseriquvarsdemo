@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Instagram, Users, ArrowUpRight } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getPageSeo } from '@/lib/settings'
 import { getImageUrl, SITE_URL } from '@/lib/constants'
 
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SpecialistsPage() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: items } = await supabase
     .from('specialists')
     .select('*')
