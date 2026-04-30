@@ -18,6 +18,8 @@ const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700'],
 })
 
+export const dynamic = 'force-dynamic'
+
 export const viewport: Viewport = {
   themeColor: '#9D7BE3',
   width: 'device-width',
@@ -66,8 +68,8 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ogImage ? [ogImage] : [],
     },
     icons: {
-      icon: settings.logo_url || '/favicon.ico',
-      apple: settings.logo_url || '/favicon.ico',
+      icon: settings.favicon_url || settings.logo_url || '/favicon.ico',
+      apple: settings.favicon_url || settings.logo_url || '/favicon.ico',
     },
     verification: {
       google: settings.google_site_verification || undefined,

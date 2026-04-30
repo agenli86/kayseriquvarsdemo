@@ -7,25 +7,16 @@ import PageHeader from '@/components/layout/PageHeader'
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 import { getIcon } from '@/lib/icons'
 
-// DÜZELTME: Build anında hata almamak için standart istemciyi ekliyoruz
-import { createClient as createStaticClient } from '@supabase/supabase-js'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { slug: string }
 }
 
-// Build anında kullanılacak güvenli istemci oluşturucu
-const getBuildTimeClient = () => {
-  return createStaticClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Build anında cookies hatası almamak için getBuildTimeClient kullanıyoruz
-  const supabase = getBuildTimeClient()
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('services')
     .select('*')
@@ -46,25 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    // KRİTİK: Vercel build hatasını önleyen kısım
-    const supabase = getBuildTimeClient()
-    const { data } = await supabase
-      .from('services')
-      .select('slug')
-      .eq('is_active', true)
-    
-    return (data || []).map((s) => ({ slug: s.slug }))
-  } catch (error) {
-    console.error("Static params failed for services:", error)
-    return []
-  }
-}
-
 export default async function ServiceDetailPage({ params }: Props) {
-  // Sayfa render edilirken (istek anında) normal createClient kullanılabilir
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: service } = await supabase
     .from('services')
     .select('*')
@@ -213,4 +187,3 @@ export default async function ServiceDetailPage({ params }: Props) {
   )
 }
 
-export const revalidate = 60

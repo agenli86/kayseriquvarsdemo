@@ -20,6 +20,7 @@ export default function BlogAdmin() {
         category: 'Cilt Bakımı',
         reading_time: 3,
         is_published: true,
+        is_featured: false,
       }}
       fields={[
         { key: 'title', label: 'Başlık', type: 'text', required: true },
@@ -31,6 +32,7 @@ export default function BlogAdmin() {
         { key: 'image_url', label: 'Kapak Görseli', type: 'image' },
         { key: 'content', label: 'Yazı İçeriği', type: 'html' },
         { key: 'is_published', label: 'Yayında', type: 'checkbox' },
+        { key: 'is_featured', label: 'Anasayfa/Blog Listesinde Öne Çıkar', type: 'checkbox' },
       ]}
     />
   )

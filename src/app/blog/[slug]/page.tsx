@@ -2,30 +2,19 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
-import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
+import { getImageUrl, SITE_URL } from '@/lib/constants'
+import { createAdminClient } from '@/lib/supabase/admin'
 
-// 1. ADIM: Standart Supabase istemcisini import et (cookies içermez)
-import { createClient as createAdminClient } from '@supabase/supabase-js'
-// 2. ADIM: Mevcut client'ı sadece sayfa içindeki (request anındaki) işlemler için kullan
-import { createClient } from '@/lib/supabase/server' 
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { slug: string }
 }
 
-// Build anında veri çekmek için yardımcı fonksiyon
-const getStaticSupabase = () => {
-  return createAdminClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Build anında cookies hatası almamak için getStaticSupabase kullanıyoruz
-  const supabase = getStaticSupabase()
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('blog_posts')
     .select('*')
@@ -48,27 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    // BURASI KRİTİK: Hata veren yer burasıydı. cookies() içermeyen istemciyi kullanıyoruz.
-    const supabase = getStaticSupabase()
-    const { data } = await supabase
-      .from('blog_posts')
-      .select('slug')
-      .eq('is_published', true)
-    
-    return (data || []).map((b) => ({ slug: b.slug }))
-  } catch (error) {
-    console.error("Static params generation failed:", error)
-    return []
-  }
-}
-
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = params
-  // Sayfa render edilirken (request anı) normal createClient kullanılabilir
-  const supabase = createClient()
-  
+  const supabase = createAdminClient()
+
   const { data: post } = await supabase
     .from('blog_posts')
     .select('*')
@@ -77,14 +49,6 @@ export default async function BlogDetailPage({ params }: Props) {
     .single()
 
   if (!post) notFound()
-
-  const { data: related } = await supabase
-    .from('blog_posts')
-    .select('id, title, slug, excerpt, image_url, category, created_at, reading_time')
-    .eq('is_published', true)
-    .neq('id', post.id)
-    .order('created_at', { ascending: false })
-    .limit(3)
 
   const heroImg = post.image_url ? getImageUrl(post.image_url) : 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1920&q=80'
   const date = new Date(post.created_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -126,10 +90,6 @@ export default async function BlogDetailPage({ params }: Props) {
           )}
         </div>
       </article>
-
-      {/* JSON-LD ve Diğer Bileşenler */}
     </SiteLayout>
   )
 }
-
-export const revalidate = 60

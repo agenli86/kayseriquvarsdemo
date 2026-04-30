@@ -4,14 +4,21 @@ import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
 import ContactForm from '@/components/forms/ContactForm'
 import { getPageSeo, getSettings } from '@/lib/settings'
-import { SITE_URL, COMPANY } from '@/lib/constants'
+import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('iletisim')
+  const title = seo?.meta_title || 'İletişim - Kayseri Güzellik Merkezi'
+  const description = seo?.meta_description || "Kayseri'nin merkezi Kocasinan'da, Quvars Beauty Studio güzellik merkezine ulaşın."
+  const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
-    title: seo?.meta_title || 'İletişim - Kayseri Güzellik Merkezi',
-    description: seo?.meta_description || 'Kayseri\'nin merkezi Kocasinan\'da, Quvars Beauty Studio güzellik merkezine ulaşın.',
+    title,
+    description,
     alternates: { canonical: seo?.canonical_url || `${SITE_URL}/iletisim` },
+    openGraph: { title, description, images: ogImage ? [ogImage] : [] },
+    twitter: { card: 'summary_large_image', title, description, images: ogImage ? [ogImage] : [] },
   }
 }
 

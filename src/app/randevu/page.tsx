@@ -6,14 +6,21 @@ import PageHeader from '@/components/layout/PageHeader'
 import AppointmentForm from '@/components/forms/AppointmentForm'
 import { createClient } from '@/lib/supabase/server'
 import { getPageSeo } from '@/lib/settings'
-import { SITE_URL, COMPANY } from '@/lib/constants'
+import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('randevu')
+  const title = seo?.meta_title || 'Online Randevu'
+  const description = seo?.meta_description || ''
+  const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
-    title: seo?.meta_title || 'Online Randevu',
-    description: seo?.meta_description || '',
+    title,
+    description,
     alternates: { canonical: seo?.canonical_url || `${SITE_URL}/randevu` },
+    openGraph: { title, description, images: ogImage ? [ogImage] : [] },
+    twitter: { card: 'summary_large_image', title, description, images: ogImage ? [ogImage] : [] },
   }
 }
 

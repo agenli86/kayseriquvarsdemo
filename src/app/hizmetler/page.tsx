@@ -9,17 +9,19 @@ import { getPageSeo } from '@/lib/settings'
 import { getImageUrl, SITE_URL } from '@/lib/constants'
 import { getIcon } from '@/lib/icons'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('hizmetler')
+  const title = seo?.meta_title || 'Hizmetlerimiz - Kayseri Güzellik Merkezi'
+  const description = seo?.meta_description || "Kayseri Kocasinan'da lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası."
+  const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
-    title: seo?.meta_title || 'Hizmetlerimiz - Kayseri Güzellik Merkezi',
-    description: seo?.meta_description || 'Kayseri Kocasinan\'da lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası.',
+    title,
+    description,
     alternates: { canonical: seo?.canonical_url || `${SITE_URL}/hizmetler` },
-    openGraph: {
-      title: seo?.meta_title || 'Hizmetlerimiz',
-      description: seo?.meta_description || '',
-      images: seo?.og_image ? [seo.og_image] : [],
-    },
+    openGraph: { title, description, images: ogImage ? [ogImage] : [] },
+    twitter: { card: 'summary_large_image', title, description, images: ogImage ? [ogImage] : [] },
   }
 }
 
@@ -112,4 +114,3 @@ export default async function ServicesPage() {
   )
 }
 
-export const revalidate = 60

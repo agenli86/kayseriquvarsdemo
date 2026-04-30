@@ -19,6 +19,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
   }, [])
 
   const logoUrl = settings.logo_url
+  const siteName = settings.site_name || 'Quvars'
+  const siteTagline = settings.site_tagline || 'Beauty Studio'
 
   return (
     <header
@@ -32,23 +34,25 @@ export default function Header({ settings }: { settings: SiteSettings }) {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-lavender-200 group-hover:ring-rose-300 transition-all duration-300">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-lavender-200 group-hover:ring-rose-300 transition-all duration-300 flex-shrink-0">
               {logoUrl ? (
-                <Image src={logoUrl} alt={COMPANY.name} fill className="object-cover" sizes="48px" priority />
+                <Image src={logoUrl} alt={siteName} fill className="object-cover" sizes="48px" priority />
               ) : (
                 <div className="w-full h-full bg-gradient-quvars flex items-center justify-center">
                   <Sparkles size={20} className="text-white" />
                 </div>
               )}
             </div>
-            <div className="hidden sm:block">
-              <div className="text-lg md:text-xl font-heading font-semibold text-gradient leading-tight">
-                Quvars
+            {!logoUrl && (
+              <div className="hidden sm:block">
+                <div className="text-lg md:text-xl font-heading font-semibold text-gradient leading-tight">
+                  {siteName}
+                </div>
+                <div className="text-[10px] md:text-xs tracking-[0.2em] text-lavender-600 uppercase font-medium -mt-0.5">
+                  {siteTagline}
+                </div>
               </div>
-              <div className="text-[10px] md:text-xs tracking-[0.2em] text-lavender-600 uppercase font-medium -mt-0.5">
-                Beauty Studio
-              </div>
-            </div>
+            )}
           </Link>
 
           {/* Desktop Nav */}
