@@ -44,10 +44,10 @@ export default function Header({ settings }: { settings: SiteSettings }) {
               )}
             </div>
             <div className="min-w-0">
-              <div className="text-base md:text-xl font-heading font-semibold text-gradient leading-tight truncate">
+              <div className="text-lg md:text-xl font-heading font-bold text-gradient leading-tight truncate">
                 {siteName}
               </div>
-              <div className="text-[9px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] text-lavender-600 uppercase font-medium -mt-0.5 truncate">
+              <div className="text-[11px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] text-lavender-600 uppercase font-semibold -mt-0.5 truncate">
                 {siteTagline}
               </div>
             </div>
@@ -68,7 +68,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
 
           {/* Right CTAs */}
           <div className="flex items-center gap-2 md:gap-3">
-            <a
+            
               href={`tel:${COMPANY.phoneE164}`}
               className="hidden md:flex items-center gap-2 text-sm font-medium text-lavender-700 hover:text-lavender-900 transition-colors"
               aria-label="Telefon ile ara"
@@ -113,7 +113,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
             </Link>
           ))}
           <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-lavender-100">
-            <a
+            
               href={`tel:${COMPANY.phoneE164}`}
               className="flex items-center justify-center gap-2 px-4 py-3 bg-lavender-50 text-lavender-700 text-base font-semibold rounded-xl"
             >
