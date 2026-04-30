@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { BookOpen, Calendar, Clock, ArrowUpRight } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getImageUrl } from '@/lib/constants'
 
 export default async function BlogSection() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('*')

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { ArrowUpRight, Tag } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getPageSeo } from '@/lib/settings'
 import { getImageUrl, SITE_URL } from '@/lib/constants'
 import { getIcon } from '@/lib/icons'
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesPage() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: services } = await supabase
     .from('services')
     .select('*')

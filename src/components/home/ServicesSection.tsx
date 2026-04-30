@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight, Sparkles, Tag } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getIcon } from '@/lib/icons'
 import { getImageUrl } from '@/lib/constants'
 
 export default async function ServicesSection() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: services } = await supabase
     .from('services')
     .select('*')
