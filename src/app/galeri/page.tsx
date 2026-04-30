@@ -7,12 +7,19 @@ import { createClient } from '@/lib/supabase/server'
 import { getPageSeo } from '@/lib/settings'
 import { getImageUrl, SITE_URL } from '@/lib/constants'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('galeri')
+  const title = seo?.meta_title || 'Galeri'
+  const description = seo?.meta_description || ''
+  const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
-    title: seo?.meta_title || 'Galeri',
-    description: seo?.meta_description || '',
+    title,
+    description,
     alternates: { canonical: seo?.canonical_url || `${SITE_URL}/galeri` },
+    openGraph: { title, description, images: ogImage ? [ogImage] : [] },
+    twitter: { card: 'summary_large_image', title, description, images: ogImage ? [ogImage] : [] },
   }
 }
 

@@ -4,29 +4,37 @@ import Image from 'next/image'
 import { Calendar, Clock, ArrowUpRight, BookOpen } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getPageSeo } from '@/lib/settings'
 import { getImageUrl, SITE_URL } from '@/lib/constants'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('blog')
+  const title = seo?.meta_title || 'Blog'
+  const description = seo?.meta_description || 'Güzellik dünyasından yazılar'
+  const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
-    title: seo?.meta_title || 'Blog',
-    description: seo?.meta_description || 'Güzellik dünyasından yazılar',
+    title,
+    description,
     alternates: { canonical: seo?.canonical_url || `${SITE_URL}/blog` },
+    openGraph: { title, description, images: ogImage ? [ogImage] : [] },
+    twitter: { card: 'summary_large_image', title, description, images: ogImage ? [ogImage] : [] },
   }
 }
 
 export default async function BlogPage() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('*')
     .eq('is_published', true)
     .order('created_at', { ascending: false })
 
-  const featured = posts?.[0]
-  const rest = posts?.slice(1) || []
+  const featuredFromAdmin = posts?.find((p) => p.is_featured)
+  const featured = featuredFromAdmin || posts?.[0]
+  const rest = posts?.filter((p) => p.id !== featured?.id) || []
 
   return (
     <SiteLayout>
@@ -152,4 +160,3 @@ export default async function BlogPage() {
   )
 }
 
-export const revalidate = 60

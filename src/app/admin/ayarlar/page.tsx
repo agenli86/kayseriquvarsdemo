@@ -17,6 +17,7 @@ const FIELD_DEFS: Record<string, { label: string; placeholder?: string; type?: '
   site_tagline: { label: 'Site Sloganı' },
   logo_url: { label: 'Logo (üst menü)', type: 'image' },
   logo_footer_url: { label: 'Logo (footer / opsiyonel)', type: 'image' },
+  favicon_url: { label: 'Favicon (site sekme ikonu)', type: 'image', help: '.ico veya .png, kare oran önerilir (32x32 veya 64x64)' },
   // İletişim
   phone: { label: 'Telefon', placeholder: '0541 118 63 38' },
   whatsapp: { label: 'WhatsApp Numarası', placeholder: '905411186338', help: 'Ülke kodu ile, sadece rakam' },
@@ -43,7 +44,7 @@ const FIELD_DEFS: Record<string, { label: string; placeholder?: string; type?: '
 }
 
 const GROUPS: Array<{ title: string; icon: any; keys: string[] }> = [
-  { title: 'Genel', icon: Sparkles, keys: ['site_name', 'site_tagline', 'logo_url', 'logo_footer_url'] },
+  { title: 'Genel', icon: Sparkles, keys: ['site_name', 'site_tagline', 'logo_url', 'logo_footer_url', 'favicon_url'] },
   { title: 'İletişim', icon: Phone, keys: ['phone', 'whatsapp', 'email', 'address', 'working_hours', 'google_maps_embed'] },
   { title: 'Sosyal Medya', icon: Instagram, keys: ['instagram', 'facebook', 'tiktok', 'youtube'] },
   { title: 'Hero Video', icon: Video, keys: ['hero_video_url', 'hero_poster_url'] },

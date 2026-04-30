@@ -6,27 +6,16 @@ import { Instagram, Calendar, MessageCircle, Award } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 
-// DÜZELTME: Build anında hata almamak için gerekli importlar
-import { createClient as createStaticClient } from '@supabase/supabase-js'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { slug: string }
 }
 
-// Build (Derleme) anında çerez hatası almadan çalışacak güvenli istemci
-const getBuildTimeClient = () => {
-  return createStaticClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
-
-/**
- * Metadata oluşturma (Build anında çalışır)
- */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const supabase = getBuildTimeClient() // Güvenli istemci kullanımı
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('specialists')
     .select('*')
@@ -42,31 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-/**
- * Statik Yolları Belirleme (Build anında çalışır)
- * Bu fonksiyon eksikti, eklenmesi build performansını artırır ve hataları önler.
- */
-export async function generateStaticParams() {
-  try {
-    const supabase = getBuildTimeClient()
-    const { data } = await supabase
-      .from('specialists')
-      .select('slug')
-      .eq('is_active', true)
-    
-    return (data || []).map((s) => ({ slug: s.slug }))
-  } catch (error) {
-    console.error("Uzmanlar static params hatası:", error)
-    return []
-  }
-}
-
-/**
- * Uzman Detay Sayfası
- */
 export default async function SpecialistDetailPage({ params }: Props) {
   const { slug } = params
-  const supabase = createClient() // İstek anında standart istemci
+  const supabase = createAdminClient()
   
   const { data: s } = await supabase
     .from('specialists')
@@ -174,4 +141,3 @@ export default async function SpecialistDetailPage({ params }: Props) {
   )
 }
 
-export const revalidate = 60
