@@ -32,20 +32,20 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* py-1 yaparak menüyü eski ince haline getirdik */}
-        <div className="flex items-center justify-between py-1">
+        {/* py-0.5 ile menü çubuğunun yüksekliğini dengede tutuyoruz */}
+        <div className="flex items-center justify-between py-0.5">
           
-          {/* Logo Alanı: Taşmayı engellemek için overflow-hidden verdik */}
-          <Link href="/" className="flex-shrink-0 overflow-hidden" aria-label={siteName}>
-            <div className="relative flex items-center justify-center h-16 sm:h-20 w-44 sm:w-56">
+          {/* Logo Alanı: Genişliği artırdık ve kesilmeleri engelledik */}
+          <Link href="/" className="flex-shrink-0" aria-label={siteName}>
+            <div className="relative flex items-center justify-start h-20 sm:h-24 w-52 sm:w-64">
               <Image
                 src={logoSrc}
                 alt={siteName}
-                width={500}
-                height={200}
+                width={400}
+                height={160}
                 priority
-                /* scale-150 ve scale-175 ile resmin içindeki yazıyı büyüterek dışındaki boşlukları ezdik abi */
-                className="absolute max-w-none h-auto w-[160%] sm:w-[170%] scale-150 sm:scale-175 object-contain"
+                /* Resmin kendi boşluklarını dikeyde ve yatayda dengelemek için pikselli height verdik ve kesilmeyi önledik */
+                className="h-[140px] sm:h-[170px] w-auto object-contain max-w-none -ml-4"
               />
             </div>
           </Link>
