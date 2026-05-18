@@ -32,19 +32,22 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* py-2 olan yeri py-4 yaptık, mobilde menü dikeyde genişledi */}
-        <div className="flex items-center justify-between py-4 md:py-5">
-          {/* Logo Alanı */}
-          <Link href="/" className="flex-shrink-0" aria-label={siteName}>
-            <Image
-              src={logoSrc}
-              alt={siteName}
-              width={350}
-              height={120}
-              priority
-              /* h-20 sm:h-24 md:h-28 lg:h-32 ayarlarıyla logoyu her ekranda ciddi oranda büyüttük */
-              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain transition-all duration-300"
-            />
+        {/* py-1 yaparak menüyü eski ince haline getirdik */}
+        <div className="flex items-center justify-between py-1">
+          
+          {/* Logo Alanı: Taşmayı engellemek için overflow-hidden verdik */}
+          <Link href="/" className="flex-shrink-0 overflow-hidden" aria-label={siteName}>
+            <div className="relative flex items-center justify-center h-16 sm:h-20 w-44 sm:w-56">
+              <Image
+                src={logoSrc}
+                alt={siteName}
+                width={500}
+                height={200}
+                priority
+                /* scale-150 ve scale-175 ile resmin içindeki yazıyı büyüterek dışındaki boşlukları ezdik abi */
+                className="absolute max-w-none h-auto w-[160%] sm:w-[170%] scale-150 sm:scale-175 object-contain"
+              />
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -79,11 +82,11 @@ export default function Header({ settings }: { settings: SiteSettings }) {
             </Link>
             <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden p-2.5 rounded-full hover:bg-lavender-100 transition-colors"
+              className="lg:hidden p-2 rounded-full hover:bg-lavender-100 transition-colors"
               aria-label="Menü"
               aria-expanded={open}
             >
-              {open ? <X size={24} className="text-lavender-700" /> : <Menu size={24} className="text-lavender-700" />}
+              {open ? <X size={22} className="text-lavender-700" /> : <Menu size={22} className="text-lavender-700" />}
             </button>
           </div>
         </div>
