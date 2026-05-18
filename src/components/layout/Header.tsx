@@ -27,21 +27,23 @@ export default function Header({ settings }: { settings: SiteSettings }) {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-soft'
-          : 'bg-white/40 backdrop-blur-md'
+          ? 'bg-white/90 backdrop-blur-xl shadow-soft'
+          : 'bg-white/70 backdrop-blur-md'
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-2">
-          {/* Logo */}
+        {/* py-2 olan yeri py-4 yaptık, mobilde menü dikeyde genişledi */}
+        <div className="flex items-center justify-between py-4 md:py-5">
+          {/* Logo Alanı */}
           <Link href="/" className="flex-shrink-0" aria-label={siteName}>
             <Image
               src={logoSrc}
               alt={siteName}
-              width={300}
-              height={100}
+              width={350}
+              height={120}
               priority
-              className="h-14 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
+              /* h-20 sm:h-24 md:h-28 lg:h-32 ayarlarıyla logoyu her ekranda ciddi oranda büyüttük */
+              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain transition-all duration-300"
             />
           </Link>
 
@@ -77,11 +79,11 @@ export default function Header({ settings }: { settings: SiteSettings }) {
             </Link>
             <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden p-2 rounded-full hover:bg-lavender-100 transition-colors"
+              className="lg:hidden p-2.5 rounded-full hover:bg-lavender-100 transition-colors"
               aria-label="Menü"
               aria-expanded={open}
             >
-              {open ? <X size={22} className="text-lavender-700" /> : <Menu size={22} className="text-lavender-700" />}
+              {open ? <X size={24} className="text-lavender-700" /> : <Menu size={24} className="text-lavender-700" />}
             </button>
           </div>
         </div>
