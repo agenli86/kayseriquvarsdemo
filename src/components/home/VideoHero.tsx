@@ -25,15 +25,11 @@ export default function VideoHero({
   const [videoFailed, setVideoFailed] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Yedek video listesi — admin panelden değiştirilemediyse / başarısız olduysa otomatik geçer
-  // Hepsi makyaj / güzellik salonu temalı, royalty-free Pexels videoları
   const candidateVideos = [
     videoUrl,
-    // 1. Makyaj uygulanması (yakın çekim, profesyonel)
+    '/videos/hero.mp4',
     'https://videos.pexels.com/video-files/7291772/7291772-uhd_2560_1440_25fps.mp4',
-    // 2. Güzellik salonu atmosferi
     'https://videos.pexels.com/video-files/7754397/7754397-uhd_2560_1440_25fps.mp4',
-    // 3. Spa / cilt bakımı (önceden çalışan default)
     'https://videos.pexels.com/video-files/4534126/4534126-uhd_2560_1440_25fps.mp4',
   ].filter(Boolean) as string[]
 
