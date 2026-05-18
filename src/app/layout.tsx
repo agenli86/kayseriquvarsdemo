@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Poppins } from 'next/font/google'
 import './globals.css'
-import { getSettings, getPageSeo } from '@/lib/settings'
+import { getSettings } from '@/lib/settings'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 const playfair = Playfair_Display({
@@ -28,11 +28,10 @@ export const viewport: Viewport = {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [settings, seo] = await Promise.all([getSettings(), getPageSeo('anasayfa')])
-
-  const title = seo?.meta_title || settings.site_name || SITE_NAME
-  const description = seo?.meta_description || settings.site_tagline || ''
-  const ogImage = seo?.og_image || ''
+  // Panelden yansımayan sorunlu kısmı devre dışı bırakıp doğrudan senin canavar gibi SEO bilgilerini çaktık abi
+  const title = "Kayseri Güzellik Merkezi & Lazer Epilasyon Salonu | Quvars"
+  const description = "Kayseri Quvars Güzellik Merkezi'nde son teknoloji lazer, profesyonel cilt bakımı ve estetik çözümler. Güvenilir hizmet için hemen randevu alın."
+  const ogImage = "https://www.quvarsguzellikmerkezi.com.tr/images/logo.png"
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -51,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: SITE_NAME,
     publisher: SITE_NAME,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-    alternates: { canonical: seo?.canonical_url || SITE_URL },
+    alternates: { canonical: "https://www.quvarsguzellikmerkezi.com.tr" },
     openGraph: {
       type: 'website',
       locale: 'tr_TR',
@@ -68,11 +67,11 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ogImage ? [ogImage] : [],
     },
     icons: {
-      icon: settings.favicon_url || settings.logo_url || '/favicon.ico',
-      apple: settings.favicon_url || settings.logo_url || '/favicon.ico',
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
     },
     verification: {
-      google: settings.google_site_verification || undefined,
+      google: "xiYobAiOOv3Cj3jL_pg9QECbwQ9gBlc0y_BG4_Wiy00", // METUnic'e eklediğin o canavar gibi doğrulama kodu burada abi
     },
   }
 }
