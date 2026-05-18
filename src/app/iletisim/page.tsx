@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
 import ContactForm from '@/components/forms/ContactForm'
+import DroneVideoSection from '@/components/contact/DroneVideoSection'
 import { getPageSeo, getSettings } from '@/lib/settings'
 import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
 
@@ -101,6 +102,8 @@ export default async function ContactPage() {
           </div>
         </div>
       </section>
+
+      <DroneVideoSection />
 
       <section className="pb-16 md:pb-20">
         <div className="container mx-auto px-4">
