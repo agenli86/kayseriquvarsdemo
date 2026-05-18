@@ -3,9 +3,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Phone, Calendar, Sparkles } from 'lucide-react'
+import { Menu, X, Phone, Calendar } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
 import type { SiteSettings } from '@/lib/types'
+
+const LOCAL_LOGO = '/images/logo.png'
 
 export default function Header({ settings }: { settings: SiteSettings }) {
   const [open, setOpen] = useState(false)
@@ -18,9 +20,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const logoUrl = settings.logo_url
-  const siteName = settings.site_name || 'Quvars'
-  const siteTagline = settings.site_tagline || 'Beauty Studio'
+  const logoSrc = settings.logo_url || LOCAL_LOGO
+  const siteName = settings.site_name || 'Quvars Beauty Studio'
 
   return (
     <header
@@ -33,24 +34,15 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-shrink">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-lavender-200 group-hover:ring-rose-300 transition-all duration-300 flex-shrink-0">
-              {logoUrl ? (
-                <Image src={logoUrl} alt={siteName} fill className="object-cover" sizes="48px" priority />
-              ) : (
-                <div className="w-full h-full bg-gradient-quvars flex items-center justify-center">
-                  <Sparkles size={20} className="text-white" />
-                </div>
-              )}
-            </div>
-            <div className="min-w-0">
-              <div className="text-lg md:text-xl font-heading font-bold text-gradient leading-tight truncate">
-                {siteName}
-              </div>
-              <div className="text-[11px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] text-lavender-600 uppercase font-semibold -mt-0.5 truncate">
-                {siteTagline}
-              </div>
-            </div>
+          <Link href="/" className="flex-shrink-0" aria-label={siteName}>
+            <Image
+              src={logoSrc}
+              alt={siteName}
+              width={200}
+              height={70}
+              priority
+              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}

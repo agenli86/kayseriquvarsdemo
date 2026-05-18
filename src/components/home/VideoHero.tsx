@@ -40,8 +40,29 @@ export default function VideoHero({
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    const onCanPlay = () => setLoaded(true)
-    const onError = () => {
+
+    v.muted = true
+    v.playsInline = true
+
+    const handleCanPlay = () => {
+      setLoaded(true)
+      const promise = v.play()
+      if (promise !== undefined) {
+        promise.catch(() => {
+          const tryPlay = () => {
+            v.play().catch(() => {})
+            document.removeEventListener('touchstart', tryPlay)
+            document.removeEventListener('scroll', tryPlay)
+            document.removeEventListener('click', tryPlay)
+          }
+          document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
+          document.addEventListener('scroll', tryPlay, { once: true, passive: true })
+          document.addEventListener('click', tryPlay, { once: true })
+        })
+      }
+    }
+
+    const handleError = () => {
       if (videoIndex < candidateVideos.length - 1) {
         setVideoIndex((i) => i + 1)
         setLoaded(false)
@@ -49,11 +70,17 @@ export default function VideoHero({
         setVideoFailed(true)
       }
     }
-    v.addEventListener('canplay', onCanPlay)
-    v.addEventListener('error', onError)
+
+    if (v.readyState >= 3) {
+      handleCanPlay()
+    } else {
+      v.addEventListener('canplay', handleCanPlay, { once: true })
+    }
+    v.addEventListener('error', handleError)
+
     return () => {
-      v.removeEventListener('canplay', onCanPlay)
-      v.removeEventListener('error', onError)
+      v.removeEventListener('canplay', handleCanPlay)
+      v.removeEventListener('error', handleError)
     }
   }, [videoIndex, candidateVideos.length])
 
@@ -72,7 +99,7 @@ export default function VideoHero({
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
-          preload="metadata"
+          preload="auto"
         >
           <source src={finalVideo} type="video/mp4" />
         </video>
