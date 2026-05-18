@@ -41,7 +41,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
               width={300}
               height={100}
               priority
-              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+              className="h-14 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
             />
           </Link>
 
