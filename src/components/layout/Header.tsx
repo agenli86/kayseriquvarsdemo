@@ -32,16 +32,16 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between py-2">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0" aria-label={siteName}>
             <Image
               src={logoSrc}
               alt={siteName}
-              width={200}
-              height={70}
+              width={300}
+              height={100}
               priority
-              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
             />
           </Link>
 

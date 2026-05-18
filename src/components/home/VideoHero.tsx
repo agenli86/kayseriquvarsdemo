@@ -136,21 +136,14 @@ export default function VideoHero({
             </div>
             <div className="absolute inset-3 rounded-full border border-dashed border-white/20 animate-spin" style={{ animationDuration: '60s', animationDirection: 'reverse' }} />
             <div className="absolute inset-6 rounded-full glass shadow-glow flex items-center justify-center overflow-hidden">
-              {logoUrl ? (
-                <Image
-                  src={logoUrl}
-                  alt={COMPANY.name}
-                  fill
-                  className="object-contain p-3"
-                  sizes="160px"
-                  priority
-                />
-              ) : (
-                <div className="text-center">
-                  <Sparkles className="text-white mx-auto mb-1" size={24} />
-                  <div className="text-white font-heading text-base font-medium">Quvars</div>
-                </div>
-              )}
+              <Image
+                src={logoUrl || '/images/logo.png'}
+                alt={COMPANY.name}
+                fill
+                className="object-contain p-2"
+                sizes="160px"
+                priority
+              />
             </div>
           </div>
         </div>

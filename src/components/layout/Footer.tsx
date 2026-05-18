@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Youtube, Sparkles } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Youtube } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
 import type { SiteSettings } from '@/lib/types'
 
@@ -18,22 +18,14 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/30 bg-white/10">
-                {footerLogo ? (
-                  <Image src={footerLogo} alt={COMPANY.name} fill className="object-cover" sizes="56px" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Sparkles size={24} className="text-white" />
-                  </div>
-                )}
-              </div>
-              <div>
-                <div className="text-2xl font-heading font-semibold">Quvars</div>
-                <div className="text-[10px] tracking-[0.25em] text-lavender-200 uppercase -mt-1">
-                  Beauty Studio
-                </div>
-              </div>
+            <Link href="/" className="inline-block mb-4" aria-label={COMPANY.name}>
+              <Image
+                src={footerLogo || '/images/logo.png'}
+                alt={COMPANY.name}
+                width={200}
+                height={70}
+                className="h-16 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm text-white/70 leading-relaxed mb-4">
               {settings.footer_about_text ||
