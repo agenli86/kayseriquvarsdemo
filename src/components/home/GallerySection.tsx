@@ -55,17 +55,12 @@ export default async function GallerySection() {
           </Link>
         </div>
 
-        {/* Masonry-like grid with varying heights */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
           {display.slice(0, 8).map((img, i) => {
-            // Varied heights for masonry feel
-            const heights = ['aspect-[3/4]', 'aspect-square', 'aspect-[4/5]', 'aspect-[3/4]', 'aspect-[3/4]', 'aspect-[4/5]', 'aspect-square', 'aspect-[3/4]']
             return (
               <div
                 key={i}
-                className={`group relative overflow-hidden rounded-2xl ${heights[i]} ${
-                  i === 0 || i === 5 ? 'md:row-span-2 md:aspect-[3/5]' : ''
-                }`}
+                className="group relative overflow-hidden rounded-2xl aspect-square"
               >
                 <Image
                   src={img.url}

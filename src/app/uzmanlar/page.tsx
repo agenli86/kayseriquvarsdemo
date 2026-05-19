@@ -98,4 +98,3 @@ export default async function SpecialistsPage() {
   )
 }
 
-export const revalidate = 60

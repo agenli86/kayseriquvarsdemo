@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Sparkles, ArrowRight, Tag } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getImageUrl } from '@/lib/constants'
 
 export default async function CampaignBanner() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('campaigns')
     .select('*')

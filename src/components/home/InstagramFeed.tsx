@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { Instagram, ExternalLink } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getImageUrl } from '@/lib/constants'
 import { getSettings } from '@/lib/settings'
 
 export default async function InstagramFeed() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const settings = await getSettings()
   const igHandle = settings.instagram?.replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/\/$/, '') || 'quvarsbeauty'
 
@@ -58,8 +58,9 @@ export default async function InstagramFeed() {
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                 sizes="(max-width: 768px) 50vw, 16vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-lavender-900/90 via-lavender-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
-                <Instagram size={20} className="text-white" />
+              <div className="absolute inset-0 bg-gradient-to-t from-lavender-900/90 via-lavender-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center gap-2 p-3">
+                <Instagram size={22} className="text-white" />
+                <span className="text-white text-xs font-semibold text-center leading-tight">Instagram'da Aç</span>
               </div>
             </a>
           ))}
