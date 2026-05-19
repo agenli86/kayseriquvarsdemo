@@ -13,8 +13,9 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('hizmetler')
-  const title = seo?.meta_title || 'Hizmetlerimiz - Kayseri Güzellik Merkezi'
-  const description = seo?.meta_description || "Kayseri Kocasinan'da lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası."
+  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'Hizmetlerimiz - Kayseri Güzellik Merkezi'
+  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : "Kayseri Kocasinan'da lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası."
+  console.log('[SEO]', 'hizmetler', 'title:', title)
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
     title,

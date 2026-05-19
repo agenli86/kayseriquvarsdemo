@@ -1,19 +1,21 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Award, Heart, Shield, Star, Sparkles, Calendar } from 'lucide-react'
+import { Award, Heart, Shield, Sparkles, Calendar } from 'lucide-react'
+import { unstable_noStore as noStore } from 'next/cache'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { getPageSeo } from '@/lib/settings'
-import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
+import { SITE_URL, getImageUrl } from '@/lib/constants'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('hakkimizda')
-  const title = seo?.meta_title || 'Hakkımızda'
-  const description = seo?.meta_description || ''
+  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'Hakkımızda'
+  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : ''
+  console.log('[SEO]', 'hakkimizda', 'title:', title)
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
     title,
@@ -25,12 +27,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
+  noStore()
   const supabase = createAdminClient()
   const { data: about } = await supabase
     .from('homepage_content')
     .select('*')
     .eq('section_key', 'hakkimizda')
-    .single()
+    .maybeSingle()
 
   const values = [
     { icon: Award, title: 'Profesyonellik', desc: 'Sertifikalı, eğitimli ve sürekli kendini geliştiren bir kadro' },
@@ -54,7 +57,7 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-soft-lg">
               <Image
-                src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1200&q=80"
+                src={about?.image_url ? getImageUrl(about.image_url) : 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1200&q=80'}
                 alt="Quvars Beauty Studio iç mekan"
                 fill
                 className="object-cover"
@@ -64,16 +67,24 @@ export default async function AboutPage() {
             <div>
               <div className="text-xs uppercase tracking-wider text-rose-600 font-semibold mb-3">Hikayemiz</div>
               <h2 className="text-3xl md:text-4xl font-heading font-medium text-lavender-900 mb-6 leading-tight">
-                Güzelliğinize <span className="text-gradient italic">ilham olmak</span> için buradayız
+                {(about?.title && about.title.trim()) ? (
+                  about.title
+                ) : (
+                  <>Güzelliğinize <span className="text-gradient italic">ilham olmak</span> için buradayız</>
+                )}
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 {about?.content ? (
-                  about.content.split('\n').filter(Boolean).map((p: string, i: number) => (
-                    <p key={i}>{p}</p>
-                  ))
+                  about.content.includes('<') ? (
+                    <div dangerouslySetInnerHTML={{ __html: about.content }} />
+                  ) : (
+                    about.content.split('\n').filter(Boolean).map((p: string, i: number) => (
+                      <p key={i}>{p}</p>
+                    ))
+                  )
                 ) : (
                   <>
-                    <p>Quvars Beauty Studio, Kayseri Kocasinan'ın merkezinde sertifikalı uzman kadromuz ile 5 yılı aşkın süredir hizmet veren bir güzellik merkezidir.</p>
+                    <p>Quvars Beauty Studio, Kayseri Kocasinan&apos;ın merkezinde sertifikalı uzman kadromuz ile 5 yılı aşkın süredir hizmet veren bir güzellik merkezidir.</p>
                     <p>Lazer epilasyon, cilt bakımı, bölgesel incelme ve nail art alanlarında modern cihazlarımız ve kişiye özel bakım protokollerimizle bakımınızı emin ellere bırakabilirsiniz.</p>
                     <p>Hijyen, samimiyet ve profesyonellik bizim için vazgeçilmez. Her ziyaretinizde özel hissetmenizi istiyoruz.</p>
                   </>
