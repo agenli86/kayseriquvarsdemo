@@ -12,8 +12,9 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('randevu')
-  const title = seo?.meta_title || 'Online Randevu'
-  const description = seo?.meta_description || ''
+  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'Online Randevu'
+  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : ''
+  console.log('[SEO]', 'randevu', 'title:', title)
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
     title,

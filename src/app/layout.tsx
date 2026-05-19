@@ -38,6 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : defaultDescription
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : defaultOgImage
   const faviconUrl = (settings.favicon_url && settings.favicon_url.trim()) ? settings.favicon_url : '/favicon.ico'
+  console.log('[SEO]', 'anasayfa', 'title:', title)
 
   return {
     metadataBase: new URL(SITE_URL),

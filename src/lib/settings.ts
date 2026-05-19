@@ -1,10 +1,10 @@
+import { unstable_noStore as noStore } from 'next/cache'
 import { createAdminClient } from './supabase/admin'
 import { createClient } from './supabase/server'
 import type { SiteSettings } from './types'
 
-// Bu fonksiyon hem server component'larda hem de generateMetadata'da güvenle çağrılır.
-// Admin (service role) client kullanır → cookie scope hatası vermez.
 export async function getSettings(): Promise<SiteSettings> {
+  noStore()
   try {
     const supabase = createAdminClient()
     const { data } = await supabase.from('site_settings').select('key, value')
@@ -19,13 +19,14 @@ export async function getSettings(): Promise<SiteSettings> {
 export const getSiteSettings = getSettings
 
 export async function getPageSeo(pageKey: string) {
+  noStore()
   try {
     const supabase = createAdminClient()
     const { data } = await supabase
       .from('page_seo')
       .select('*')
       .eq('page_key', pageKey)
-      .single()
+      .maybeSingle()
     return data
   } catch {
     return null
