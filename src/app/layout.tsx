@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: title, template: `%s | ${SITE_NAME}` },
+    title: { default: title, template: '%s' },
     description,
     keywords: [
       'kayseri lazer epilasyon',
