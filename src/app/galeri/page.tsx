@@ -68,14 +68,12 @@ export default async function GalleryPage() {
               <p className="text-gray-500">Henüz galeri görseli yok.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
               {display.map((img, i) => {
-                // Random heights for masonry feel
-                const heights = ['aspect-[3/4]', 'aspect-square', 'aspect-[4/5]', 'aspect-[3/4]']
                 return (
                   <div
                     key={i}
-                    className={`group relative overflow-hidden rounded-2xl ${heights[i % 4]}`}
+                    className="group relative overflow-hidden rounded-2xl aspect-square"
                   >
                     <Image
                       src={img.url}
@@ -101,4 +99,3 @@ export default async function GalleryPage() {
   )
 }
 
-export const revalidate = 60

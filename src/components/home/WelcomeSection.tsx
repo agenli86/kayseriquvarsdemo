@@ -1,8 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { Sparkles, ShieldCheck, Award, Heart } from 'lucide-react'
 
 export default async function WelcomeSection() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('homepage_content')
     .select('*')

@@ -124,4 +124,3 @@ export default async function ContactPage() {
   )
 }
 
-export const revalidate = 60

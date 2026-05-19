@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Award, Heart, Shield, Star, Sparkles, Calendar } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getPageSeo } from '@/lib/settings'
 import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
 
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data: about } = await supabase
     .from('homepage_content')
     .select('*')
@@ -152,4 +152,3 @@ export default async function AboutPage() {
   )
 }
 
-export const revalidate = 60

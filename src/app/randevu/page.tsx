@@ -121,4 +121,3 @@ export default async function AppointmentPage() {
   )
 }
 
-export const revalidate = 60
