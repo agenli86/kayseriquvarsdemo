@@ -9,6 +9,7 @@ import GallerySection from '@/components/home/GallerySection'
 import BlogSection from '@/components/home/BlogSection'
 import TestimonialsMarquee from '@/components/home/TestimonialsMarquee'
 import InstagramFeed from '@/components/home/InstagramFeed'
+import IntroSEO from '@/components/home/IntroSEO'
 import FaqSection from '@/components/home/FaqSection'
 import MapSection from '@/components/home/MapSection'
 import { getSettings } from '@/lib/settings'
@@ -25,6 +26,7 @@ export default async function HomePage() {
         posterUrl={settings.hero_poster_url || undefined}
         logoUrl={settings.logo_url || undefined}
       />
+      <IntroSEO />
       <WelcomeSection />
       <ServicesSection />
       <StatsBanner />
