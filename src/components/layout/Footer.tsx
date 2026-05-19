@@ -135,11 +135,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/60">
-          <div>{settings.footer_copyright || `© ${new Date().getFullYear()} ${COMPANY.name}. Tüm hakları saklıdır.`}</div>
-          <div className="flex items-center gap-1">
-            <span>Tasarım & Geliştirme:</span>
-            <span className="text-lavender-200 font-medium">Musa Web Studio</span>
-          </div>
+          <div>{settings.footer_copyright || `© ${new Date().getFullYear()} ${COMPANY.name} · Tüm hakları saklıdır.`}</div>
         </div>
       </div>
     </footer>
