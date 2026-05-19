@@ -159,6 +159,7 @@ export type InstagramPost = {
   caption: string | null
   image_url: string
   permalink: string | null
+  embed_code?: string | null
   media_type: string
   posted_at: string | null
   is_active: boolean
