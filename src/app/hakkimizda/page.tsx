@@ -107,7 +107,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-gradient-quvars-soft">
+      <section className="py-16 md:py-20 bg-gradient-guzel-soft">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-heading font-medium text-lavender-900 mb-4 leading-tight">
@@ -122,7 +122,7 @@ export default async function AboutPage() {
               const Icon = v.icon
               return (
                 <div key={v.title} className="p-6 md:p-8 bg-white rounded-3xl shadow-soft border border-lavender-100">
-                  <div className="w-14 h-14 mb-4 rounded-2xl bg-gradient-quvars-soft flex items-center justify-center">
+                  <div className="w-14 h-14 mb-4 rounded-2xl bg-gradient-guzel-soft flex items-center justify-center">
                     <Icon size={26} className="text-lavender-600" />
                   </div>
                   <h3 className="text-lg font-heading font-semibold text-lavender-900 mb-2">{v.title}</h3>
@@ -145,7 +145,7 @@ export default async function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/randevu"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft-lg hover:shadow-glow transition-all"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft-lg hover:shadow-glow transition-all"
             >
               <Calendar size={16} />
               <span>Randevu Al</span>

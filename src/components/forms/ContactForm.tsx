@@ -29,7 +29,7 @@ export default function ContactForm() {
   if (success) {
     return (
       <div className="text-center py-10">
-        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-quvars flex items-center justify-center">
+        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-guzel flex items-center justify-center">
           <CheckCircle size={36} className="text-white" />
         </div>
         <h3 className="text-2xl font-heading font-medium text-lavender-900 mb-3">Mesajınız İletildi!</h3>
@@ -106,7 +106,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-quvars text-white font-semibold rounded-full shadow-soft hover:shadow-glow transition-all disabled:opacity-50"
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-guzel text-white font-semibold rounded-full shadow-soft hover:shadow-glow transition-all disabled:opacity-50"
       >
         {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
         <span>{loading ? 'Gönderiliyor...' : 'Mesajı Gönder'}</span>

@@ -137,7 +137,7 @@ export default function VideoHero({
         {/* Logo card */}
         <div className="mb-6 md:mb-8 animate-scale-in">
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
-            <div className="absolute inset-0 rounded-full bg-gradient-quvars opacity-50 blur-2xl animate-pulse-soft" />
+            <div className="absolute inset-0 rounded-full bg-gradient-guzel opacity-50 blur-2xl animate-pulse-soft" />
             <div className="absolute inset-0 rounded-full border border-white/30 animate-spin" style={{ animationDuration: '40s' }}>
               <div className="absolute top-0 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 bg-rose-300 rounded-full" />
             </div>
@@ -186,7 +186,7 @@ export default function VideoHero({
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md sm:max-w-none px-2 animate-fade-up" style={{ animationDelay: '0.4s' }}>
           <Link
             href="/randevu"
-            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 md:py-4 bg-gradient-quvars text-white text-sm md:text-base font-semibold rounded-full shadow-soft-lg hover:shadow-glow transition-all btn-glow w-full sm:w-auto"
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 md:py-4 bg-gradient-guzel text-white text-sm md:text-base font-semibold rounded-full shadow-soft-lg hover:shadow-glow transition-all btn-glow w-full sm:w-auto"
           >
             <Calendar size={16} />
             <span>Hemen Randevu Al</span>

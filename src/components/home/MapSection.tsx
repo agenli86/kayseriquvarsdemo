@@ -69,7 +69,7 @@ export default function MapSection({ settings }: { settings: SiteSettings }) {
               href={`https://maps.google.com/maps?daddr=${encodeURIComponent(address)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
+              className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
             >
               <Navigation size={14} />
               <span>Yol Tarifi Al</span>

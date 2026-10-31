@@ -70,9 +70,9 @@ const config: Config = {
         body: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-quvars': 'linear-gradient(135deg, #B89BF0 0%, #C595E2 50%, #EC85A8 100%)',
-        'gradient-quvars-soft': 'linear-gradient(135deg, #F3EDFF 0%, #F5EBFC 50%, #FDEBF2 100%)',
-        'gradient-quvars-dark': 'linear-gradient(135deg, #553F8A 0%, #774C95 50%, #A2375C 100%)',
+        'gradient-guzel': 'linear-gradient(135deg, #B89BF0 0%, #C595E2 50%, #EC85A8 100%)',
+        'gradient-guzel-soft': 'linear-gradient(135deg, #F3EDFF 0%, #F5EBFC 50%, #FDEBF2 100%)',
+        'gradient-guzel-dark': 'linear-gradient(135deg, #553F8A 0%, #774C95 50%, #A2375C 100%)',
         'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
       },
       boxShadow: {

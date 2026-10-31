@@ -28,7 +28,7 @@ export default function PageHeader({
   const alignCls = align === 'center' ? 'text-center mx-auto' : 'text-left'
 
   return (
-    <section className="relative overflow-hidden bg-gradient-quvars-soft">
+    <section className="relative overflow-hidden bg-gradient-guzel-soft">
       {/* Background image with overlay */}
       {bgImage ? (
         <>

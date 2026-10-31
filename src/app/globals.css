@@ -150,31 +150,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Prose styling for blog content */
-.prose-quvars {
+.prose-guzel {
   @apply max-w-none text-gray-700 leading-relaxed;
 }
-.prose-quvars h2 {
+.prose-guzel h2 {
   @apply text-2xl md:text-3xl font-heading text-lavender-800 mt-8 mb-4;
 }
-.prose-quvars h3 {
+.prose-guzel h3 {
   @apply text-xl md:text-2xl font-heading text-lavender-700 mt-6 mb-3;
 }
-.prose-quvars p {
+.prose-guzel p {
   @apply mb-4;
 }
-.prose-quvars ul {
+.prose-guzel ul {
   @apply list-disc pl-6 mb-4 space-y-2;
 }
-.prose-quvars ol {
+.prose-guzel ol {
   @apply list-decimal pl-6 mb-4 space-y-2;
 }
-.prose-quvars a {
+.prose-guzel a {
   @apply text-rose-500 hover:text-rose-600 underline;
 }
-.prose-quvars img {
+.prose-guzel img {
   @apply rounded-2xl my-6 shadow-soft;
 }
-.prose-quvars blockquote {
+.prose-guzel blockquote {
   @apply border-l-4 border-lavender-400 pl-4 italic text-lavender-700 my-6;
 }
 

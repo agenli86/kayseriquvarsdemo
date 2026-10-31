@@ -84,7 +84,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <div className="container mx-auto px-4 max-w-3xl">
           {post.excerpt && <p className="text-xl text-lavender-700 italic mb-10 pb-8 border-b">{post.excerpt}</p>}
           {post.content ? (
-            <div className="prose-quvars text-base md:text-lg" dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div className="prose-guzel text-base md:text-lg" dangerouslySetInnerHTML={{ __html: post.content }} />
           ) : (
             <p className="text-gray-500 italic">İçerik henüz hazırlanıyor.</p>
           )}

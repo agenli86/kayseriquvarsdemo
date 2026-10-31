@@ -45,7 +45,7 @@ export default async function WelcomeSection() {
                 className="group relative p-6 md:p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-lavender-100 hover:border-lavender-300 hover:shadow-soft-lg transition-all hover:-translate-y-2 duration-500"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <div className="w-14 h-14 mb-4 rounded-2xl bg-gradient-quvars-soft flex items-center justify-center group-hover:bg-gradient-quvars transition-all duration-500">
+                <div className="w-14 h-14 mb-4 rounded-2xl bg-gradient-guzel-soft flex items-center justify-center group-hover:bg-gradient-guzel transition-all duration-500">
                   <Icon size={26} className="text-lavender-600 group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="text-base md:text-lg font-heading font-semibold text-lavender-900 mb-1.5">

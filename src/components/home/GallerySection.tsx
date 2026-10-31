@@ -30,7 +30,7 @@ export default async function GallerySection() {
     : demoImages.map((url, i) => ({ url, alt: `Güzellik merkezi ${i + 1}`, title: null }))
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-quvars-soft">
+    <section className="py-20 md:py-28 bg-gradient-guzel-soft">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div className="max-w-2xl">

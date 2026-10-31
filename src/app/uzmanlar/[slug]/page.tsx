@@ -49,7 +49,7 @@ export default async function SpecialistDetailPage({ params }: Props) {
 
   return (
     <SiteLayout>
-      <section className="bg-gradient-quvars-soft pt-20 pb-12 md:pt-28 md:pb-16">
+      <section className="bg-gradient-guzel-soft pt-20 pb-12 md:pt-28 md:pb-16">
         <div className="container mx-auto px-4">
           <nav className="text-sm mb-8 text-lavender-700">
             <Link href="/" className="hover:text-rose-600">Anasayfa</Link>
@@ -108,7 +108,7 @@ export default async function SpecialistDetailPage({ params }: Props) {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/randevu"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
                 >
                   <Calendar size={16} />
                   <span>Randevu Al</span>

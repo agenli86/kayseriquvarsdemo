@@ -38,7 +38,7 @@ export default function DroneVideoSection() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all btn-glow"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all btn-glow"
               aria-label="Drone yol tarifi videosunu Instagram'da aç"
             >
               <Instagram size={16} />

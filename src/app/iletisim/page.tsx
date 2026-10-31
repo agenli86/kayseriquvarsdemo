@@ -57,7 +57,7 @@ export default async function ContactPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="p-6 md:p-8 rounded-3xl bg-gradient-quvars-dark text-white">
+              <div className="p-6 md:p-8 rounded-3xl bg-gradient-guzel-dark text-white">
                 <h3 className="text-xl font-heading font-medium mb-5">İletişim Bilgileri</h3>
                 <ul className="space-y-4 text-sm">
                   <li className="flex items-start gap-3">

@@ -30,7 +30,7 @@ export default function FaqAccordion({ items }: { items: Faq[] }) {
                   {faq.question}
                 </span>
                 <span className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all ${
-                  open ? 'bg-gradient-quvars text-white rotate-180' : 'bg-lavender-50 text-lavender-700'
+                  open ? 'bg-gradient-guzel text-white rotate-180' : 'bg-lavender-50 text-lavender-700'
                 }`}>
                   <ChevronDown size={18} />
                 </span>

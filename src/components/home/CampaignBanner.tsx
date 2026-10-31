@@ -39,7 +39,7 @@ export default async function CampaignBanner() {
   return (
     <section className="py-16 md:py-20">
       <div className="container mx-auto px-4">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-quvars-dark shadow-soft-lg">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-guzel-dark shadow-soft-lg">
           {/* Decorative blobs */}
           <div className="absolute top-0 left-0 w-96 h-96 bg-lavender-400/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-rose-400/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />

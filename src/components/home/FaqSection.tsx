@@ -13,7 +13,7 @@ export default async function FaqSection() {
   if (!faqs || faqs.length === 0) return null
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-quvars-soft" id="sss">
+    <section className="py-20 md:py-28 bg-gradient-guzel-soft" id="sss">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/80 backdrop-blur rounded-full text-xs font-medium text-lavender-700 uppercase tracking-wider">

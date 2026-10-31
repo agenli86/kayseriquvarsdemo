@@ -70,7 +70,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
             </a>
             <Link
               href="/randevu"
-              className="hidden sm:inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all btn-glow"
+              className="hidden sm:inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all btn-glow"
             >
               <Calendar size={16} />
               <span>Randevu Al</span>
@@ -115,7 +115,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
             <Link
               href="/randevu"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-quvars text-white text-base font-semibold rounded-xl shadow-soft"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-guzel text-white text-base font-semibold rounded-xl shadow-soft"
             >
               <Calendar size={18} />
               <span>Randevu Al</span>

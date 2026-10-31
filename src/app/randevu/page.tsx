@@ -56,7 +56,7 @@ export default async function AppointmentPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="p-6 rounded-3xl bg-gradient-quvars-soft border border-lavender-100">
+              <div className="p-6 rounded-3xl bg-gradient-guzel-soft border border-lavender-100">
                 <h3 className="text-lg font-heading font-semibold text-lavender-900 mb-4">
                   Hızlı İletişim
                 </h3>
@@ -65,7 +65,7 @@ export default async function AppointmentPage() {
                     href={telHref(phone)}
                     className="flex items-center gap-3 p-3 rounded-xl bg-white hover:shadow-soft transition-all border border-lavender-100"
                   >
-                    <div className="w-10 h-10 rounded-full bg-gradient-quvars flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-gradient-guzel flex items-center justify-center">
                       <Phone size={16} className="text-white" />
                     </div>
                     <div>
@@ -102,14 +102,14 @@ export default async function AppointmentPage() {
                     'Profesyonel bakım deneyiminizi yaşayın',
                   ].map((step, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-quvars text-white text-xs font-bold flex items-center justify-center">{i + 1}</span>
+                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-guzel text-white text-xs font-bold flex items-center justify-center">{i + 1}</span>
                       <span className="text-gray-700 leading-relaxed pt-0.5">{step}</span>
                     </li>
                   ))}
                 </ol>
               </div>
 
-              <div className="p-6 rounded-3xl bg-gradient-quvars-dark text-white relative overflow-hidden">
+              <div className="p-6 rounded-3xl bg-gradient-guzel-dark text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-rose-400/20 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2" />
                 <CheckCircle size={28} className="text-rose-300 mb-3" />
                 <h3 className="text-lg font-heading font-medium mb-2">Yeni Müşterilerimize</h3>

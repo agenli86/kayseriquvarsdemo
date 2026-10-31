@@ -81,7 +81,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-quvars-soft flex items-center justify-center">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-guzel-soft flex items-center justify-center">
                   <Icon size={24} className="text-lavender-700" />
                 </div>
                 <div>
@@ -93,7 +93,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               </div>
 
               {service.content ? (
-                <div className="prose-quvars" dangerouslySetInnerHTML={{ __html: service.content }} />
+                <div className="prose-guzel" dangerouslySetInnerHTML={{ __html: service.content }} />
               ) : (
                 <p className="text-gray-600 leading-relaxed text-lg">{service.short_description}</p>
               )}
@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   </a>
                 </div>
 
-                <div className="p-6 rounded-3xl bg-gradient-quvars-dark text-white shadow-soft-lg relative overflow-hidden">
+                <div className="p-6 rounded-3xl bg-gradient-guzel-dark text-white shadow-soft-lg relative overflow-hidden">
                   <Sparkles size={28} className="text-rose-300 mb-3" />
                   <h3 className="text-xl font-heading font-medium mb-2">Randevu Al</h3>
                   <div className="flex flex-col gap-2">
@@ -170,7 +170,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                       href={`/hizmetler/${r.slug}`}
                       className="group p-6 bg-white rounded-3xl shadow-soft hover:shadow-soft-lg transition-all hover:-translate-y-1 duration-500 border border-lavender-100"
                     >
-                      <div className="w-12 h-12 mb-4 rounded-2xl bg-gradient-quvars-soft flex items-center justify-center group-hover:bg-gradient-quvars transition-all duration-500">
+                      <div className="w-12 h-12 mb-4 rounded-2xl bg-gradient-guzel-soft flex items-center justify-center group-hover:bg-gradient-guzel transition-all duration-500">
                         <RIcon size={20} className="text-lavender-600 group-hover:text-white transition-colors" />
                       </div>
                       <h3 className="text-lg font-heading font-semibold text-lavender-900 mb-2 group-hover:text-rose-600 transition-colors">

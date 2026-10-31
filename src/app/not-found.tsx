@@ -21,7 +21,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-quvars text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-guzel text-white text-sm font-semibold rounded-full shadow-soft hover:shadow-glow transition-all"
             >
               <Home size={16} />
               <span>Anasayfaya Dön</span>

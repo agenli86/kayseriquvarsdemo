@@ -66,7 +66,7 @@ ${form.message ? 'Not: ' + form.message : ''}`
   if (success) {
     return (
       <div className="text-center py-10">
-        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-quvars flex items-center justify-center">
+        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-guzel flex items-center justify-center">
           <CheckCircle size={36} className="text-white" />
         </div>
         <h3 className="text-2xl font-heading font-medium text-lavender-900 mb-3">Randevu Talebiniz İletildi!</h3>
@@ -182,7 +182,7 @@ ${form.message ? 'Not: ' + form.message : ''}`
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-quvars text-white font-semibold rounded-full shadow-soft hover:shadow-glow transition-all disabled:opacity-50"
+          className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-guzel text-white font-semibold rounded-full shadow-soft hover:shadow-glow transition-all disabled:opacity-50"
         >
           {loading ? <Loader2 size={18} className="animate-spin" /> : <Calendar size={18} />}
           <span>{loading ? 'Gönderiliyor...' : 'Randevu Talebi Gönder'}</span>

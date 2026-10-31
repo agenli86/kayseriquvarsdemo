@@ -29,7 +29,7 @@ export default function StickyButtons({ settings }: { settings: SiteSettings }) 
       <a
         href={`tel:${phoneE164}`}
         aria-label="Telefon ile ara"
-        className="group relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-gradient-quvars text-white shadow-soft-lg hover:scale-110 transition-all"
+        className="group relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-gradient-guzel text-white shadow-soft-lg hover:scale-110 transition-all"
       >
         <span className="absolute inset-0 rounded-full bg-lavender-500 animate-ping opacity-20"></span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 md:w-7 md:h-7 relative">
