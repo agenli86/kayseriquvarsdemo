@@ -79,7 +79,7 @@ export async function generateMetadata(): Promise<Metadata> {
       shortcut: faviconUrl,
     },
     verification: {
-      google: "xiYobAiOOv3Cj3jL_pg9QECbwQ9gBlc0y_BG4_Wiy00",
+      google: ["-da4RdxWrOfuB7sHjMrEasSBh_sYoW1MiI0IfUm1ZdU", "xiYobAiOOv3Cj3jL_pg9QECbwQ9gBlc0y_BG4_Wiy00"],
     },
   }
 }
