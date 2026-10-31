@@ -47,7 +47,7 @@ export default async function AboutPage() {
       <PageHeader
         badge="Hakkımızda"
         title={about?.title || 'Bizi tanıyın'}
-        subtitle={about?.subtitle || "Kayseri'nin gözde güzellik adresi"}
+        subtitle={about?.subtitle || "Gözde güzellik adresiniz"}
         breadcrumbs={[{ label: 'Hakkımızda' }]}
         bgImage="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920&q=80"
       />
@@ -58,7 +58,7 @@ export default async function AboutPage() {
             <div className="relative aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-soft-lg">
               <Image
                 src={about?.image_url ? getImageUrl(about.image_url) : 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1200&q=80'}
-                alt="Quvars Beauty Studio iç mekan"
+                alt="Salon iç mekan"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -84,7 +84,7 @@ export default async function AboutPage() {
                   )
                 ) : (
                   <>
-                    <p>Quvars Beauty Studio, Kayseri Kocasinan&apos;ın merkezinde sertifikalı uzman kadromuz ile 5 yılı aşkın süredir hizmet veren bir güzellik merkezidir.</p>
+                    <p>Güzellik merkezimiz, sertifikalı uzman kadromuz ile 5 yılı aşkın süredir hizmet veren bir güzellik merkezidir.</p>
                     <p>Lazer epilasyon, cilt bakımı, bölgesel incelme ve nail art alanlarında modern cihazlarımız ve kişiye özel bakım protokollerimizle bakımınızı emin ellere bırakabilirsiniz.</p>
                     <p>Hijyen, samimiyet ve profesyonellik bizim için vazgeçilmez. Her ziyaretinizde özel hissetmenizi istiyoruz.</p>
                   </>

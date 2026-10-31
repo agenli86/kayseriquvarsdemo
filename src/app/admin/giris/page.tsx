@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 mb-4">
             <Sparkles size={28} className="text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-1" style={{ fontFamily: 'Playfair Display, serif' }}>Quvars Admin</h1>
+          <h1 className="text-3xl font-bold text-white mb-1" style={{ fontFamily: 'Playfair Display, serif' }}>Yönetim Paneli</h1>
           <p className="text-white/60 text-sm">Yönetim paneline giriş yapın</p>
         </div>
 

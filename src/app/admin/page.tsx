@@ -64,7 +64,7 @@ export default function AdminDashboard() {
           <span>Hoş Geldiniz</span>
         </div>
         <h1 className="text-3xl font-bold text-purple-900 mb-1" style={{ fontFamily: 'Playfair Display, serif' }}>
-          Quvars Yönetim Paneli
+          Yönetim Paneli
         </h1>
         <p className="text-gray-600">Sitenizin tüm içeriklerini buradan yönetebilirsiniz.</p>
       </div>

@@ -32,14 +32,14 @@ export default async function ServicesSection() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/80 backdrop-blur rounded-full text-xs font-medium text-lavender-700 uppercase tracking-wider">
               <Sparkles size={12} />
-              <span>Kayseri Güzellik Merkezi · Hizmetlerimiz</span>
+              <span>Güzellik Merkezi · Hizmetlerimiz</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-medium text-lavender-900 leading-tight">
-              Kayseri lazer epilasyon &{' '}
+              Lazer epilasyon &{' '}
               <span className="text-gradient italic">cilt bakım hizmetlerimiz</span>
             </h2>
             <p className="text-gray-600 mt-4 text-base md:text-lg leading-relaxed">
-              Kocasinan'ın merkezinde, her ihtiyacınız için uzmanlaşmış güzellik hizmetleri. Profesyonel ekibimiz ve modern cihazlarımızla bakımınız emin ellerde.
+              Her ihtiyacınız için uzmanlaşmış güzellik hizmetleri. Profesyonel ekibimiz ve modern cihazlarımızla bakımınız emin ellerde.
             </p>
           </div>
           <Link
@@ -69,7 +69,7 @@ export default async function ServicesSection() {
                 <div className="absolute inset-0">
                   <Image
                     src={img}
-                    alt={`${service.name} - Kayseri Quvars Beauty Studio`}
+                    alt={service.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-1000"
                     sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}

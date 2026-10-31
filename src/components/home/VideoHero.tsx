@@ -12,6 +12,10 @@ interface Props {
   logoUrl?: string
   title?: string
   subtitle?: string
+  badge?: string
+  titleItalic?: string
+  rating?: string
+  reviewCount?: string
 }
 
 export default function VideoHero({
@@ -20,6 +24,10 @@ export default function VideoHero({
   logoUrl,
   title,
   subtitle,
+  badge,
+  titleItalic,
+  rating,
+  reviewCount,
 }: Props) {
   const [loaded, setLoaded] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
@@ -27,7 +35,6 @@ export default function VideoHero({
 
   const candidateVideos = [
     videoUrl,
-    '/videos/hero.mp4',
     'https://videos.pexels.com/video-files/7291772/7291772-uhd_2560_1440_25fps.mp4',
     'https://videos.pexels.com/video-files/7754397/7754397-uhd_2560_1440_25fps.mp4',
     'https://videos.pexels.com/video-files/4534126/4534126-uhd_2560_1440_25fps.mp4',
@@ -138,7 +145,7 @@ export default function VideoHero({
             <div className="absolute inset-6 rounded-full glass shadow-glow flex items-center justify-center overflow-hidden">
               <Image
                 src={logoUrl || '/images/logo.png'}
-                alt={COMPANY.name}
+                alt={badge || 'Logo'}
                 fill
                 className="object-contain p-2"
                 sizes="160px"
@@ -150,23 +157,19 @@ export default function VideoHero({
 
         <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 glass-dark rounded-full text-[11px] sm:text-xs font-medium text-white/90 animate-fade-up">
           <Sparkles size={12} className="text-rose-300" />
-          <span className="tracking-wider uppercase">Kayseri Güzellik Merkezi · Kocasinan</span>
+          <span className="tracking-wider uppercase">{badge || 'Güzellik Merkezi'}</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-light text-white leading-[1.1] mb-4 md:mb-5 max-w-4xl px-2 animate-fade-up" style={{ animationDelay: '0.1s' }}>
-          {title || (
-            <>
-              Güzelliğinizi
-              <br />
-              <span className="font-medium italic bg-gradient-to-r from-lavender-200 via-lilac-200 to-rose-200 bg-clip-text text-transparent">
-                yeniden keşfedin
-              </span>
-            </>
-          )}
+          {title || 'Güzelliğinizi'}
+          <br />
+          <span className="font-medium italic bg-gradient-to-r from-lavender-200 via-lilac-200 to-rose-200 bg-clip-text text-transparent">
+            {titleItalic || 'yeniden keşfedin'}
+          </span>
         </h1>
 
         <p className="text-sm sm:text-base md:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed mb-5 md:mb-7 px-4 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          {subtitle || 'Kayseri\'nin güvenilir güzellik merkezi Quvars Beauty Studio\'da lazer epilasyon, cilt bakımı, bölgesel incelme ve nail art hizmetleri uzman ekibimizle sizi bekliyor.'}
+          {subtitle || 'Güvenilir güzellik merkezimizde lazer epilasyon, cilt bakımı, bölgesel incelme ve nail art hizmetleri uzman ekibimizle sizi bekliyor.'}
         </p>
 
         <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 animate-fade-up text-sm" style={{ animationDelay: '0.3s' }}>
@@ -175,9 +178,9 @@ export default function VideoHero({
               <Star key={i} size={14} className="fill-rose-300 text-rose-300" />
             ))}
           </div>
-          <span className="text-white font-semibold">4.8</span>
+          <span className="text-white font-semibold">{rating || COMPANY.rating}</span>
           <span className="text-white/40">·</span>
-          <span className="text-white/80">{COMPANY.reviewCount} Google yorumu</span>
+          <span className="text-white/80">{reviewCount || COMPANY.reviewCount} Google yorumu</span>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md sm:max-w-none px-2 animate-fade-up" style={{ animationDelay: '0.4s' }}>

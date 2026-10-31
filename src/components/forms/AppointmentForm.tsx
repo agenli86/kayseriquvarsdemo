@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Calendar, CheckCircle, Loader2, MessageCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
-import { COMPANY } from '@/lib/constants'
+import { COMPANY, telHref } from '@/lib/constants'
 
 interface ServiceOption {
   slug: string
   name: string
 }
 
-export default function AppointmentForm({ services }: { services: ServiceOption[] }) {
+export default function AppointmentForm({ services, phone = COMPANY.phone, whatsapp = COMPANY.whatsapp }: { services: ServiceOption[]; phone?: string; whatsapp?: string }) {
   const searchParams = useSearchParams()
   const preselected = searchParams?.get('hizmet') || ''
 
@@ -60,7 +60,7 @@ ${form.service ? 'Hizmet: ' + (services.find(s => s.slug === form.service)?.name
 ${form.preferred_date ? 'Tarih: ' + form.preferred_date : ''}
 ${form.preferred_time ? 'Saat: ' + form.preferred_time : ''}
 ${form.message ? 'Not: ' + form.message : ''}`
-    window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(txt)}`, '_blank')
+    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(txt)}`, '_blank')
   }
 
   if (success) {
@@ -75,7 +75,7 @@ ${form.message ? 'Not: ' + form.message : ''}`
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href={`https://wa.me/${COMPANY.whatsapp}`}
+            href={`https://wa.me/${whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-full font-semibold"
@@ -84,10 +84,10 @@ ${form.message ? 'Not: ' + form.message : ''}`
             WhatsApp ile Yaz
           </a>
           <a
-            href={`tel:${COMPANY.phoneE164}`}
+            href={telHref(phone)}
             className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-lavender-200 text-lavender-800 rounded-full font-semibold"
           >
-            {COMPANY.phone}
+            {phone}
           </a>
         </div>
       </div>

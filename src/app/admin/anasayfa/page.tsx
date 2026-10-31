@@ -16,6 +16,10 @@ interface Section {
 }
 
 const SECTION_LABELS: Record<string, { name: string; desc: string }> = {
+  intro: {
+    name: 'Tanıtım Yazısı (SEO)',
+    desc: 'Anasayfada video hero\'nun hemen altındaki kısa tanıtım yazısı.',
+  },
   welcome: {
     name: 'Hoş Geldiniz Bölümü',
     desc: 'Anasayfada video hero\'nun altında çıkan tanıtım bölümü.',

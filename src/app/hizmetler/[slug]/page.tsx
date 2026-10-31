@@ -8,6 +8,7 @@ import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 import { getIcon } from '@/lib/icons'
 
 import { createAdminClient } from '@/lib/supabase/admin'
+import { getSettings } from '@/lib/settings'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!data) return { title: 'Hizmet bulunamadı' }
 
   return {
-    title: data.title || `${data.name} - Kayseri`,
+    title: data.title || `${data.name} - Güzellik Merkezi`,
     description: data.meta_description || data.short_description,
     alternates: { canonical: `${SITE_URL}/hizmetler/${data.slug}` },
     openGraph: {
@@ -39,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ServiceDetailPage({ params }: Props) {
   const supabase = createAdminClient()
+  const whatsapp = (await getSettings()).whatsapp || COMPANY.whatsapp
   const { data: service } = await supabase
     .from('services')
     .select('*')
@@ -59,7 +61,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const heroImg = service.image_url ? getImageUrl(service.image_url) : 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80'
 
   const whatsappMsg = `Merhaba, ${service.name} hizmeti hakkında fiyat ve detay bilgisi almak istiyorum.`
-  const whatsappLink = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`
+  const whatsappLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMsg)}`
 
   return (
     <SiteLayout>

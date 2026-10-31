@@ -14,8 +14,8 @@ type Post = {
 export default function InstagramFeed() {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
-  const [igUrl, setIgUrl] = useState('https://www.instagram.com/quvarsbeauty/')
-  const [igHandle, setIgHandle] = useState('quvarsbeauty')
+  const [igUrl, setIgUrl] = useState('https://www.instagram.com/')
+  const [igHandle, setIgHandle] = useState('')
 
   useEffect(() => {
     const supabase = createClient()
@@ -163,7 +163,7 @@ export default function InstagramFeed() {
 
         <div className="text-center mt-10">
           <a
-            href="https://www.instagram.com/quvarsbeauty/"
+            href={igUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-lavender-200 text-lavender-800 text-sm font-semibold rounded-full hover:border-lavender-400 hover:shadow-soft transition-all"

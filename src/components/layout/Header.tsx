@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Phone, Calendar } from 'lucide-react'
-import { NAV_LINKS, COMPANY } from '@/lib/constants'
+import { NAV_LINKS, COMPANY, telHref } from '@/lib/constants'
 import type { SiteSettings } from '@/lib/types'
 
 const LOCAL_LOGO = '/images/logo.png'
@@ -21,7 +21,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
   }, [])
 
   const logoSrc = settings.logo_url || LOCAL_LOGO
-  const siteName = settings.site_name || 'Quvars Beauty Studio'
+  const siteName = settings.site_name || 'Güzellik Merkezi'
 
   return (
     <header
@@ -32,22 +32,17 @@ export default function Header({ settings }: { settings: SiteSettings }) {
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* py-0.5 ile menü çubuğunun yüksekliğini dengede tutuyoruz */}
         <div className="flex items-center justify-between py-0.5">
           
-          {/* Logo Alanı: Genişliği artırdık ve kesilmeleri engelledik */}
           <Link href="/" className="flex-shrink-0" aria-label={siteName}>
-            <div className="relative flex items-center justify-start h-20 sm:h-24 w-52 sm:w-64">
-              <Image
-                src={logoSrc}
-                alt={siteName}
-                width={400}
-                height={160}
-                priority
-                /* Resmin kendi boşluklarını dikeyde ve yatayda dengelemek için pikselli height verdik ve kesilmeyi önledik */
-                className="h-[140px] sm:h-[170px] w-auto object-contain max-w-none -ml-4"
-              />
-            </div>
+            <Image
+              src={logoSrc}
+              alt={siteName}
+              width={640}
+              height={333}
+              priority
+              className="h-14 sm:h-16 w-auto object-contain my-2"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -66,12 +61,12 @@ export default function Header({ settings }: { settings: SiteSettings }) {
           {/* Right CTAs */}
           <div className="flex items-center gap-2 md:gap-3">
             <a
-              href={`tel:${COMPANY.phoneE164}`}
+              href={telHref(settings.phone)}
               className="hidden md:flex items-center gap-2 text-sm font-medium text-lavender-700 hover:text-lavender-900 transition-colors"
               aria-label="Telefon ile ara"
             >
               <Phone size={16} />
-              <span>{COMPANY.phone}</span>
+              <span>{settings.phone || COMPANY.phone}</span>
             </a>
             <Link
               href="/randevu"
@@ -111,11 +106,11 @@ export default function Header({ settings }: { settings: SiteSettings }) {
           ))}
           <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-lavender-100">
             <a
-              href={`tel:${COMPANY.phoneE164}`}
+              href={telHref(settings.phone)}
               className="flex items-center justify-center gap-2 px-4 py-3 bg-lavender-50 text-lavender-700 text-base font-semibold rounded-xl"
             >
               <Phone size={18} />
-              <span>{COMPANY.phone}</span>
+              <span>{settings.phone || COMPANY.phone}</span>
             </a>
             <Link
               href="/randevu"

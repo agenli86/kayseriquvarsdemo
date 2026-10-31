@@ -10,7 +10,7 @@ export default async function WelcomeSection() {
     .single()
 
   const features = [
-    { icon: Award, label: 'Sertifikalı Kadro', desc: 'Kayseri\'nin alanında uzman, eğitimli güzellik profesyonelleri' },
+    { icon: Award, label: 'Sertifikalı Kadro', desc: 'Alanında uzman, eğitimli güzellik profesyonelleri' },
     { icon: ShieldCheck, label: 'Hijyen & Güven', desc: 'Tek kullanımlık ekipman, hastane standartlarında sterilizasyon' },
     { icon: Sparkles, label: 'Modern Cihazlar', desc: 'FDA onaylı son teknoloji ile etkili ve kalıcı sonuçlar' },
     { icon: Heart, label: 'Kişiye Özel', desc: 'Cilt tipinize uygun özelleştirilmiş bakım protokolleri' },
@@ -22,17 +22,17 @@ export default async function WelcomeSection() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 bg-lavender-50 rounded-full text-xs font-medium text-lavender-700 uppercase tracking-wider">
             <Sparkles size={12} />
-            <span>Hoş Geldiniz · Kocasinan / Kayseri</span>
+            <span>Hoş Geldiniz</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-heading font-medium text-lavender-900 mb-5 leading-tight">
-            {data?.title || 'Kayseri\'nin Güvenilir Güzellik Adresi'}
+            {data?.title || 'Güvenilir Güzellik Adresiniz'}
           </h2>
           {data?.subtitle && (
             <p className="text-lavender-600 italic mb-4 text-lg">{data.subtitle}</p>
           )}
           <p className="text-gray-600 leading-relaxed text-base md:text-lg">
             {data?.content ||
-              'Quvars Beauty Studio olarak Kayseri Kocasinan\'da, lazer epilasyon ve cilt bakımından bölgesel inceltmeye kadar geniş hizmet yelpazemizle güzellik yolculuğunuzda yanınızdayız. Modern teknoloji, samimi atmosfer ve uzman kadromuzla bakımınızı emin ellere bırakabilirsiniz.'}
+              'Lazer epilasyon ve cilt bakımından bölgesel inceltmeye kadar geniş hizmet yelpazemizle güzellik yolculuğunuzda yanınızdayız. Modern teknoloji, samimi atmosfer ve uzman kadromuzla bakımınızı emin ellere bırakabilirsiniz.'}
           </p>
         </div>
 

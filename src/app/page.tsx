@@ -25,6 +25,12 @@ export default async function HomePage() {
         videoUrl={settings.hero_video_url || undefined}
         posterUrl={settings.hero_poster_url || undefined}
         logoUrl={settings.logo_url || undefined}
+        badge={settings.hero_badge || undefined}
+        title={settings.hero_title || undefined}
+        titleItalic={settings.hero_title_italic || undefined}
+        subtitle={settings.hero_subtitle || undefined}
+        rating={settings.google_rating || undefined}
+        reviewCount={settings.google_review_count || undefined}
       />
       <IntroSEO />
       <WelcomeSection />

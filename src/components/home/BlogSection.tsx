@@ -22,14 +22,14 @@ export default async function BlogSection() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-lavender-50 rounded-full text-xs font-medium text-lavender-700 uppercase tracking-wider">
               <BookOpen size={12} />
-              <span>Blog · Kayseri Güzellik Rehberi</span>
+              <span>Blog · Güzellik Rehberi</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-medium text-lavender-900 leading-tight">
               Cilt bakımı &amp; lazer epilasyon{' '}
               <span className="text-gradient italic">uzmanından öneriler</span>
             </h2>
             <p className="text-gray-600 mt-4 text-base md:text-lg leading-relaxed">
-              Kayseri ikliminden cilt tipinize uygun bakım protokollerine, lazer epilasyondan bölgesel inceltmeye uzman içerikler.
+              Mevsime ve cilt tipinize uygun bakım protokollerine, lazer epilasyondan bölgesel inceltmeye uzman içerikler.
             </p>
           </div>
           <Link

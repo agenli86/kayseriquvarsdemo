@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, Clock, Navigation } from 'lucide-react'
-import { COMPANY } from '@/lib/constants'
+import { COMPANY, telHref } from '@/lib/constants'
 import type { SiteSettings } from '@/lib/types'
 
 export default function MapSection({ settings }: { settings: SiteSettings }) {
@@ -20,7 +20,7 @@ export default function MapSection({ settings }: { settings: SiteSettings }) {
             <span>Bize Ulaşın</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-heading font-medium text-lavender-900 leading-tight">
-            Kayseri Kocasinan'da{' '}
+            Güzellik merkezimizde{' '}
             <span className="text-gradient italic">ziyaretinizi bekliyoruz</span>
           </h2>
         </div>
@@ -50,7 +50,7 @@ export default function MapSection({ settings }: { settings: SiteSettings }) {
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-rose-500 flex-shrink-0" />
-                <a href={`tel:${COMPANY.phoneE164}`} className="hover:text-lavender-700 font-medium">
+                <a href={telHref(phone)} className="hover:text-lavender-700 font-medium">
                   {phone}
                 </a>
               </li>

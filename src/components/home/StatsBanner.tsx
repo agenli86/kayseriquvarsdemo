@@ -69,7 +69,7 @@ export default function StatsBanner() {
             </span>
           </h2>
           <p className="mt-4 text-white/70 text-base md:text-lg">
-            Kayseri'de güzellik dünyasının yeni adresi olarak rakamlarla ifade etmeye çalışıyoruz.
+            Güzellik dünyasındaki yerimizi rakamlarla ifade etmeye çalışıyoruz.
           </p>
         </div>
 

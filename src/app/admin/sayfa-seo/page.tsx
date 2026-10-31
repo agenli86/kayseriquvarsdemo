@@ -107,7 +107,7 @@ export default function SayfaSeoAdmin() {
                   className="admin-input"
                   value={page.canonical_url || ''}
                   onChange={(e) => update(page.page_key, 'canonical_url', e.target.value)}
-                  placeholder="https://quvarsbeauty.com/sayfa"
+                  placeholder="https://www.siteniz.com/sayfa"
                 />
               </div>
               <div>

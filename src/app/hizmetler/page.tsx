@@ -13,8 +13,8 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('hizmetler')
-  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'Hizmetlerimiz - Kayseri Güzellik Merkezi'
-  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : "Kayseri Kocasinan'da lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası."
+  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'Hizmetlerimiz - Güzellik Merkezi'
+  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : "Lazer epilasyon, cilt bakımı, bölgesel incelme, nail art ve daha fazlası."
   console.log('[SEO]', 'hizmetler', 'title:', title)
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
@@ -46,10 +46,10 @@ export default async function ServicesPage() {
   return (
     <SiteLayout>
       <PageHeader
-        badge="Kayseri Güzellik Merkezi"
+        badge="Güzellik Merkezi"
         title="Hizmetlerimiz"
         subtitle="Modern teknoloji, uzman dokunuş"
-        description="Kayseri Kocasinan'da lazer epilasyondan cilt bakımına, nail art'tan bölgesel inceltmeye geniş hizmet yelpazemizle bakımınız emin ellerde. Detaylı bilgi ve fiyat için hizmet detayına tıklayın."
+        description="Lazer epilasyondan cilt bakımına, nail art'tan bölgesel inceltmeye geniş hizmet yelpazemizle bakımınız emin ellerde. Detaylı bilgi ve fiyat için hizmet detayına tıklayın."
         breadcrumbs={[{ label: 'Hizmetler' }]}
         bgImage="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920&q=80"
       />

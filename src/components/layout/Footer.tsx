@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Youtube } from 'lucide-react'
-import { NAV_LINKS, COMPANY } from '@/lib/constants'
+import { NAV_LINKS, COMPANY, telHref } from '@/lib/constants'
 import type { SiteSettings } from '@/lib/types'
 
 export default function Footer({ settings }: { settings: SiteSettings }) {
@@ -29,7 +29,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
             </Link>
             <p className="text-sm text-white/70 leading-relaxed mb-4">
               {settings.footer_about_text ||
-                'Kayseri\'nin merkezinde lazer epilasyon, cilt bakımı ve nail art alanlarında uzman kadrosuyla hizmet veren güzellik merkezi.'}
+                'Lazer epilasyon, cilt bakımı ve nail art alanlarında uzman kadrosuyla hizmet veren güzellik merkezi.'}
             </p>
             <div className="flex gap-3">
               {settings.instagram && (
@@ -113,7 +113,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-lavender-300 flex-shrink-0" />
-                <a href={`tel:${COMPANY.phoneE164}`} className="text-white/80 hover:text-white">
+                <a href={telHref(settings.phone)} className="text-white/80 hover:text-white">
                   {settings.phone || COMPANY.phone}
                 </a>
               </li>

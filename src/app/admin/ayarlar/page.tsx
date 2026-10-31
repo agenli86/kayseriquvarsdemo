@@ -19,8 +19,8 @@ const FIELD_DEFS: Record<string, { label: string; placeholder?: string; type?: '
   logo_footer_url: { label: 'Logo (footer / opsiyonel)', type: 'image' },
   favicon_url: { label: 'Favicon (site sekme ikonu)', type: 'image', help: '.ico veya .png, kare oran önerilir (32x32 veya 64x64)' },
   // İletişim
-  phone: { label: 'Telefon', placeholder: '0541 118 63 38' },
-  whatsapp: { label: 'WhatsApp Numarası', placeholder: '905411186338', help: 'Ülke kodu ile, sadece rakam' },
+  phone: { label: 'Telefon', placeholder: '0555 555 55 55' },
+  whatsapp: { label: 'WhatsApp Numarası', placeholder: '905555555555', help: 'Ülke kodu ile, sadece rakam' },
   email: { label: 'E-posta' },
   address: { label: 'Adres', type: 'textarea' },
   working_hours: { label: 'Çalışma Saatleri' },
@@ -33,6 +33,12 @@ const FIELD_DEFS: Record<string, { label: string; placeholder?: string; type?: '
   // Video Hero
   hero_video_url: { label: 'Anasayfa Hero Video URL', help: 'Boş bırakırsanız Pexels\'den varsayılan video oynar', placeholder: 'https://....mp4' },
   hero_poster_url: { label: 'Hero Video Poster (yedek görsel)', type: 'image' },
+  hero_badge: { label: 'Hero Üst Etiket', placeholder: 'Güzellik Merkezi' },
+  hero_title: { label: 'Hero Başlık (1. satır)', placeholder: 'Güzelliğinizi' },
+  hero_title_italic: { label: 'Hero Başlık (2. satır, italik)', placeholder: 'yeniden keşfedin' },
+  hero_subtitle: { label: 'Hero Açıklama', type: 'textarea' },
+  google_rating: { label: 'Google Puanı', placeholder: '4.8' },
+  google_review_count: { label: 'Google Yorum Sayısı', placeholder: '91' },
   // SEO / Doğrulama
   google_site_verification: { label: 'Google Search Console Doğrulama Kodu' },
   google_analytics_id: { label: 'Google Analytics ID', placeholder: 'G-XXXXXXX' },
@@ -47,7 +53,7 @@ const GROUPS: Array<{ title: string; icon: any; keys: string[] }> = [
   { title: 'Genel', icon: Sparkles, keys: ['site_name', 'site_tagline', 'logo_url', 'logo_footer_url', 'favicon_url'] },
   { title: 'İletişim', icon: Phone, keys: ['phone', 'whatsapp', 'email', 'address', 'working_hours', 'google_maps_embed'] },
   { title: 'Sosyal Medya', icon: Instagram, keys: ['instagram', 'facebook', 'tiktok', 'youtube'] },
-  { title: 'Hero Video', icon: Video, keys: ['hero_video_url', 'hero_poster_url'] },
+  { title: 'Anasayfa Hero (Video & Yazılar)', icon: Video, keys: ['hero_video_url', 'hero_poster_url', 'hero_badge', 'hero_title', 'hero_title_italic', 'hero_subtitle', 'google_rating', 'google_review_count'] },
   { title: 'SEO & Analytics', icon: Search, keys: ['google_site_verification', 'google_analytics_id', 'meta_pixel_id', 'google_reviews_place_id'] },
   { title: 'Instagram API (Opsiyonel)', icon: Globe, keys: ['instagram_access_token', 'instagram_business_id'] },
 ]

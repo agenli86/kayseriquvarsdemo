@@ -49,7 +49,7 @@ export default function AdminSidebar({ open, onClose }: { open: boolean; onClose
               <Sparkles size={18} className="text-white" />
             </div>
             <div>
-              <div className="font-bold text-white text-sm leading-tight">Quvars</div>
+              <div className="font-bold text-white text-sm leading-tight">Güzellik Merkezi</div>
               <div className="text-[10px] text-white/60 tracking-wider">ADMIN PANEL</div>
             </div>
           </div>

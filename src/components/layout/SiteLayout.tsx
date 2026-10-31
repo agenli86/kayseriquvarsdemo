@@ -21,7 +21,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': settings.homepage_schema_type || 'BeautySalon',
-            name: settings.site_title || 'Quvars Beauty Studio',
+            name: settings.site_title || 'Güzellik Merkezi',
             description: settings.site_description,
             telephone: settings.phone,
             email: settings.email,
@@ -30,9 +30,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             address: {
               '@type': 'PostalAddress',
               streetAddress: settings.address,
-              addressLocality: 'Kayseri',
-              addressRegion: 'Kocasinan',
-              postalCode: '38110',
+              addressLocality: settings.city || '',
               addressCountry: 'TR',
             },
             openingHours: settings.working_hours,

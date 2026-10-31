@@ -17,6 +17,12 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // vercel.app adresleri Google'a kapalı; site sadece kendi alan adında indexlenir
+        source: '/:path*',
+        has: [{ type: 'host', value: '(?<sub>.*)\\.vercel\\.app' }],
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
         source: '/videos/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },

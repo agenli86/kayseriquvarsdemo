@@ -21,7 +21,7 @@ export default function MusteriGorusleriAdmin() {
       }}
       fields={[
         { key: 'name', label: 'İsim', type: 'text', required: true },
-        { key: 'location', label: 'Konum/Şehir', type: 'text', placeholder: 'Kayseri' },
+        { key: 'location', label: 'Konum/Şehir', type: 'text', placeholder: 'Şehir' },
         { key: 'rating', label: 'Puan (1-5)', type: 'number' },
         { key: 'source', label: 'Kaynak', type: 'select', options: ['Google', 'Instagram', 'Site', 'Telefon', 'Diğer'] },
         { key: 'avatar_url', label: 'Profil Fotoğrafı (opsiyonel)', type: 'image' },

@@ -23,7 +23,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={24} />
         </button>
-        <span className="font-bold text-sm">Quvars Admin</span>
+        <span className="font-bold text-sm">Yönetim Paneli</span>
         <div className="w-6" />
       </div>
 

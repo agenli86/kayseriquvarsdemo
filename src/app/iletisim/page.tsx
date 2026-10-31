@@ -5,14 +5,14 @@ import PageHeader from '@/components/layout/PageHeader'
 import ContactForm from '@/components/forms/ContactForm'
 import DroneVideoSection from '@/components/contact/DroneVideoSection'
 import { getPageSeo, getSettings } from '@/lib/settings'
-import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
+import { SITE_URL, COMPANY, getImageUrl, telHref } from '@/lib/constants'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('iletisim')
-  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'İletişim - Kayseri Güzellik Merkezi'
-  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : "Kayseri'nin merkezi Kocasinan'da, Quvars Beauty Studio güzellik merkezine ulaşın."
+  const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : 'İletişim - Güzellik Merkezi'
+  const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : "Güzellik merkezimize telefon, WhatsApp veya form ile ulaşın."
   console.log('[SEO]', 'iletisim', 'title:', title)
   const ogImage = seo?.og_image ? getImageUrl(seo.og_image) : undefined
   return {
@@ -38,7 +38,7 @@ export default async function ContactPage() {
       <PageHeader
         badge="İletişim"
         title="Bize ulaşın"
-        subtitle="Kayseri Kocasinan güzellik merkezi"
+        subtitle="Güzellik merkezimize ulaşın"
         description="Telefon, WhatsApp, e-posta veya formu kullanarak iletişime geçebilirsiniz. Randevu için en kısa yol WhatsApp."
         breadcrumbs={[{ label: 'İletişim' }]}
       />
@@ -71,7 +71,7 @@ export default async function ContactPage() {
                     <Phone size={18} className="text-rose-300 mt-0.5 flex-shrink-0" />
                     <div>
                       <div className="text-xs text-white/60 mb-0.5">Telefon</div>
-                      <a href={`tel:${COMPANY.phoneE164}`} className="text-white hover:text-rose-200 font-medium">{phone}</a>
+                      <a href={telHref(phone)} className="text-white hover:text-rose-200 font-medium">{phone}</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
@@ -93,7 +93,7 @@ export default async function ContactPage() {
                       <Instagram size={18} className="text-rose-300 mt-0.5 flex-shrink-0" />
                       <div>
                         <div className="text-xs text-white/60 mb-0.5">Instagram</div>
-                        <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-rose-200">@quvarsbeauty</a>
+                        <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-rose-200">{'@' + (settings.instagram.replace(/\/+$/, '').split('/').pop() || 'instagram')}</a>
                       </div>
                     </li>
                   )}
@@ -116,7 +116,7 @@ export default async function ContactPage() {
               style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Quvars Beauty Studio konumu"
+              title="Konum"
             />
           </div>
         </div>

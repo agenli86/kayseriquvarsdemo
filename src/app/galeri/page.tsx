@@ -49,7 +49,7 @@ export default async function GalleryPage() {
 
   const display = items && items.length > 0
     ? items.map((i) => ({ url: getImageUrl(i.image_url), alt: i.alt_text || i.title || 'Galeri', title: i.title }))
-    : demoImages.map((url, i) => ({ url, alt: `Quvars galeri ${i + 1}`, title: null }))
+    : demoImages.map((url, i) => ({ url, alt: `Galeri ${i + 1}`, title: null }))
 
   return (
     <SiteLayout>

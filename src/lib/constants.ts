@@ -1,7 +1,7 @@
-export const SITE_NAME = 'Quvars Beauty Studio'
-export const SITE_TAGLINE = 'Kayseri Lazer Epilasyon, Cilt Bakımı & Bölgesel İncelme'
-export const SITE_DOMAIN = 'quvarsbeauty.com'
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE_DOMAIN}`
+export const SITE_NAME = 'Güzellik Merkezi'
+export const SITE_TAGLINE = 'Lazer Epilasyon, Cilt Bakımı & Bölgesel İncelme'
+export const SITE_DOMAIN = 'guzellikyazilim.vercel.app'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : `https://${SITE_DOMAIN}`)
 
 export const SUPABASE_IMG_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/img`
 
@@ -14,17 +14,17 @@ export function getImageUrl(path: string | null | undefined, fallback?: string):
 }
 
 export const COMPANY = {
-  name: 'Quvars Beauty Studio',
-  legalName: 'Quvars Güzellik Merkezi',
-  city: 'Kayseri',
-  district: 'Kocasinan',
-  address: 'Erciyesevler, Sivas Caddesi Bulvarı 229/A, 38110 Kocasinan/Kayseri',
-  phone: '0541 118 63 38',
-  phoneE164: '+905411186338',
-  whatsapp: '905411186338',
-  email: 'info@quvarsbeauty.com',
+  name: 'Güzellik Merkezi',
+  legalName: 'Güzellik Merkezi',
+  city: '',
+  district: '',
+  address: 'Örnek Mah. Güzellik Cad. No: 1',
+  phone: '0555 555 55 55',
+  phoneE164: '+905555555555',
+  whatsapp: '905555555555',
+  email: 'info@ornek.com',
   workingHours: 'Pzt-Cmt: 10:00 - 20:00',
-  googleReviewLink: 'https://share.google/0XObGomjIAtBtIcvp',
+  googleReviewLink: '',
   rating: 4.8,
   reviewCount: 91,
 }
@@ -44,3 +44,11 @@ export const ICON_OPTIONS = [
   'crown', 'wand-2', 'palette', 'scissors', 'spray-can', 'leaf', 'feather',
   'droplets', 'flame', 'zap'
 ]
+
+// Panelden girilen telefonu tel: linkine çevirir (0555 555 55 55 → +905555555555)
+export function telHref(phone: string | null | undefined): string {
+  const d = (phone || COMPANY.phone).replace(/\D/g, '')
+  if (d.startsWith('90')) return `tel:+${d}`
+  if (d.startsWith('0')) return `tel:+9${d}`
+  return `tel:+90${d}`
+}

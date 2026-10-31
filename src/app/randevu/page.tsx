@@ -5,8 +5,8 @@ import SiteLayout from '@/components/layout/SiteLayout'
 import PageHeader from '@/components/layout/PageHeader'
 import AppointmentForm from '@/components/forms/AppointmentForm'
 import { createClient } from '@/lib/supabase/server'
-import { getPageSeo } from '@/lib/settings'
-import { SITE_URL, COMPANY, getImageUrl } from '@/lib/constants'
+import { getPageSeo, getSettings } from '@/lib/settings'
+import { SITE_URL, COMPANY, getImageUrl, telHref } from '@/lib/constants'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,6 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AppointmentPage() {
+  const settings = await getSettings()
+  const phone = settings.phone || COMPANY.phone
+  const whatsapp = settings.whatsapp || COMPANY.whatsapp
   const supabase = createClient()
   const { data: services } = await supabase
     .from('services')
@@ -48,7 +51,7 @@ export default async function AppointmentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 p-6 md:p-10 bg-white rounded-3xl shadow-soft border border-lavender-100">
               <Suspense fallback={<div className="text-gray-500">Form yükleniyor...</div>}>
-                <AppointmentForm services={services || []} />
+                <AppointmentForm services={services || []} phone={phone} whatsapp={whatsapp} />
               </Suspense>
             </div>
 
@@ -59,7 +62,7 @@ export default async function AppointmentPage() {
                 </h3>
                 <div className="space-y-3">
                   <a
-                    href={`tel:${COMPANY.phoneE164}`}
+                    href={telHref(phone)}
                     className="flex items-center gap-3 p-3 rounded-xl bg-white hover:shadow-soft transition-all border border-lavender-100"
                   >
                     <div className="w-10 h-10 rounded-full bg-gradient-quvars flex items-center justify-center">
@@ -67,11 +70,11 @@ export default async function AppointmentPage() {
                     </div>
                     <div>
                       <div className="text-xs text-gray-500">Telefon</div>
-                      <div className="font-semibold text-lavender-900">{COMPANY.phone}</div>
+                      <div className="font-semibold text-lavender-900">{phone}</div>
                     </div>
                   </a>
                   <a
-                    href={`https://wa.me/${COMPANY.whatsapp}`}
+                    href={`https://wa.me/${whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-xl bg-white hover:shadow-soft transition-all border border-lavender-100"

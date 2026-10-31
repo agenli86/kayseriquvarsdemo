@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
 import { createAdminClient } from '@/lib/supabase/admin'
 
-// Eski hatalı domaini pasif edip senin gerçek domaini buraya kemik gibi çaktık abi
-const REAL_SITE_URL = 'https://www.quvarsguzellikmerkezi.com.tr'
+import { SITE_URL } from '@/lib/constants'
+
+const REAL_SITE_URL = SITE_URL
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createAdminClient()

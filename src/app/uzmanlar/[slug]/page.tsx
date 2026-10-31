@@ -7,6 +7,7 @@ import SiteLayout from '@/components/layout/SiteLayout'
 import { getImageUrl, SITE_URL, COMPANY } from '@/lib/constants'
 
 import { createAdminClient } from '@/lib/supabase/admin'
+import { getSettings } from '@/lib/settings'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function SpecialistDetailPage({ params }: Props) {
   const { slug } = params
   const supabase = createAdminClient()
-  
+  const whatsapp = (await getSettings()).whatsapp || COMPANY.whatsapp
   const { data: s } = await supabase
     .from('specialists')
     .select('*')
@@ -113,7 +114,7 @@ export default async function SpecialistDetailPage({ params }: Props) {
                   <span>Randevu Al</span>
                 </Link>
                 <a
-                  href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(`Merhaba, ${s.name} ile randevu almak istiyorum.`)}`}
+                  href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(`Merhaba, ${s.name} ile randevu almak istiyorum.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-lavender-200 text-lavender-800 text-sm font-semibold rounded-full hover:border-lavender-400 transition-all"

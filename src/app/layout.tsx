@@ -30,9 +30,9 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   const [seo, settings] = await Promise.all([getPageSeo('anasayfa'), getSettings()])
 
-  const defaultTitle = "Kayseri Güzellik Merkezi & Lazer Epilasyon Salonu | Quvars"
-  const defaultDescription = "Kayseri Quvars Güzellik Merkezi'nde son teknoloji lazer, profesyonel cilt bakımı ve estetik çözümler. Güvenilir hizmet için hemen randevu alın."
-  const defaultOgImage = "https://www.quvarsguzellikmerkezi.com.tr/images/logo.png"
+  const defaultTitle = "Güzellik Merkezi & Lazer Epilasyon Salonu"
+  const defaultDescription = "Güzellik merkezimizde son teknoloji lazer, profesyonel cilt bakımı ve estetik çözümler. Güvenilir hizmet için hemen randevu alın."
+  const defaultOgImage = `${SITE_URL}/images/logo.png`
 
   const title = (seo?.meta_title && seo.meta_title.trim()) ? seo.meta_title : defaultTitle
   const description = (seo?.meta_description && seo.meta_description.trim()) ? seo.meta_description : defaultDescription
@@ -45,19 +45,18 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: title, template: '%s' },
     description,
     keywords: [
-      'kayseri lazer epilasyon',
-      'kayseri güzellik merkezi',
-      'kayseri cilt bakımı',
-      'kocasinan güzellik salonu',
-      'bölgesel incelme kayseri',
-      'nail art kayseri',
-      'quvars beauty studio',
+      'lazer epilasyon',
+      'güzellik merkezi',
+      'cilt bakımı',
+      'güzellik salonu',
+      'bölgesel incelme',
+      'nail art',
     ],
     authors: [{ name: SITE_NAME }],
     creator: SITE_NAME,
     publisher: SITE_NAME,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-    alternates: { canonical: "https://www.quvarsguzellikmerkezi.com.tr" },
+    alternates: { canonical: SITE_URL },
     openGraph: {
       type: 'website',
       locale: 'tr_TR',
@@ -79,7 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
       shortcut: faviconUrl,
     },
     verification: {
-      google: ["-da4RdxWrOfuB7sHjMrEasSBh_sYoW1MiI0IfUm1ZdU", "xiYobAiOOv3Cj3jL_pg9QECbwQ9gBlc0y_BG4_Wiy00"],
+      google: settings.google_site_verification?.trim() || undefined,
     },
   }
 }
